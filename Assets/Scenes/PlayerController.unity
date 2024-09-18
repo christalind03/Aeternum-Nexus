@@ -712,6 +712,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _cameraSensitivity: 10
   _movementSpeed: 10
+  _jumpForce: 5
   _cameraTransform: {fileID: 1594158069}
   _playerTransform: {fileID: 2064867469}
   _playerRigidbody: {fileID: 2064867471}
@@ -737,7 +738,7 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 0
+  m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0

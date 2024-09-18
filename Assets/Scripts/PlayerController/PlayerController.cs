@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-// Ensure we have a Rigidbody component as it is required to calculate the movement for every Player.
+// Ensure we have a Rigidbody component as it is required to calculate the movement for every player.
 [RequireComponent(typeof(Rigidbody))]
 public class PlayerController : MonoBehaviour
 {
@@ -14,6 +14,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private float _movementSpeed;
 
+    [SerializeField]
+    private float _jumpForce;
+
     [Header("Player Parameters")]
     [SerializeField]
     private Transform _cameraTransform;
@@ -24,6 +27,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private Rigidbody _playerRigidbody;
 
+    private bool _isGrounded;
     private float _xRotation; // Keep track of the current rotation of the camera and player on the x-axis.
     private float _yRotation; // Keep track of the current rotation of the camera and player on the y-axis.
     private PlayerControls _playerControls;
@@ -37,6 +41,7 @@ public class PlayerController : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked; // Keep the cursor locked to the center of the game view.
 
         _playerControls = new PlayerControls();
+        _playerRigidbody.freezeRotation = true;
     }
 
     /// <summary>
@@ -44,7 +49,9 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     private void OnEnable()
     {
-        _playerControls.Enable(); 
+        _playerControls.Enable();
+
+        _playerControls.Player.Jump.performed += HandleJump;
     }
 
     /// <summary>
@@ -52,6 +59,10 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     private void Update()
     {
+        // Check to see if the player is on the ground or not.
+        // We add 0.25f to the player's position here as an offset to ensure the ray is going through the ground.
+        _isGrounded = Physics.Raycast(_playerTransform.position, Vector3.down, _playerTransform.position.y + 0.25f);
+
         HandleLook();
         HandleMovement();
     }
@@ -87,11 +98,24 @@ public class PlayerController : MonoBehaviour
         _playerRigidbody.AddForce(_movementSpeed * moveDirection.normalized, ForceMode.Force);
     }
 
+    private void HandleJump(InputAction.CallbackContext context)
+    {
+        if (_isGrounded)
+        {
+            // Reset the velocity on the y-axis.
+            _playerRigidbody.velocity = new Vector3(_playerRigidbody.velocity.x, 0f, _playerRigidbody.velocity.z);
+
+            _playerRigidbody.AddForce(_playerTransform.up * _jumpForce, ForceMode.Impulse);
+        }
+    }
+
     /// <summary>
     /// Disable the PlayerControls actions and action maps when the component is disabled.
     /// </summary>
     private void OnDisable()
     {
         _playerControls.Disable();
+
+        _playerControls.Player.Jump.performed -= HandleJump;
     }
 }
