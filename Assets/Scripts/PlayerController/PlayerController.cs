@@ -2,16 +2,27 @@ using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+// Ensure we have a Rigidbody component as it is required to calculate the movement for every Player.
+[RequireComponent(typeof(Rigidbody))]
 public class PlayerController : MonoBehaviour
 {
+    [Header("Camera Parameters")]
     [SerializeField]
     private float _cameraSensitivity;
 
+    [Header("Movement Parameters")]
+    [SerializeField]
+    private float _movementSpeed;
+
+    [Header("Player Parameters")]
     [SerializeField]
     private Transform _cameraTransform;
 
     [SerializeField]
     private Transform _playerTransform;
+
+    [SerializeField]
+    private Rigidbody _playerRigidbody;
 
     private float _xRotation; // Keep track of the current rotation of the camera and player on the x-axis.
     private float _yRotation; // Keep track of the current rotation of the camera and player on the y-axis.
@@ -42,6 +53,7 @@ public class PlayerController : MonoBehaviour
     private void Update()
     {
         HandleLook();
+        HandleMovement();
     }
 
     /// <summary>
@@ -61,6 +73,18 @@ public class PlayerController : MonoBehaviour
         // Since we have not yet implemented character models, we will only rotate the entire character on the y-axis.
         // This logic may change to display the character looking upwards once a character model is implemented.
         _playerTransform.rotation = Quaternion.Euler(0, _yRotation, 0); 
+    }
+
+    /// <summary>
+    /// Handle the player's movement on the x-axis and z-axis.
+    /// </summary>
+    private void HandleMovement()
+    {
+        // Ensure we always move relative to the direction we are looking at.
+        Vector2 userInput = _playerControls.Player.Movement.ReadValue<Vector2>();
+        Vector3 moveDirection = _playerTransform.forward * userInput.y + _playerTransform.right * userInput.x;
+
+        _playerRigidbody.AddForce(_movementSpeed * moveDirection.normalized, ForceMode.Force);
     }
 
     /// <summary>
