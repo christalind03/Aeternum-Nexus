@@ -711,6 +711,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _cameraSensitivity: 10
+  _groundDrag: 1.5
   _movementSpeed: 10
   _jumpForce: 5
   _cameraTransform: {fileID: 1594158069}

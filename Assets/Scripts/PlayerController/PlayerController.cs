@@ -12,6 +12,9 @@ public class PlayerController : MonoBehaviour
 
     [Header("Movement Parameters")]
     [SerializeField]
+    private float _groundDrag;
+
+    [SerializeField]
     private float _movementSpeed;
 
     [SerializeField]
@@ -63,8 +66,23 @@ public class PlayerController : MonoBehaviour
         // We add 0.25f to the player's position here as an offset to ensure the ray is going through the ground.
         _isGrounded = Physics.Raycast(_playerTransform.position, Vector3.down, _playerTransform.position.y + 0.25f);
 
+        LimitSpeed();
         HandleLook();
         HandleMovement();
+    }
+
+    /// <summary>
+    /// Limit the character's maximum speed to the movement speed.
+    /// </summary>
+    private void LimitSpeed()
+    {
+        Vector3 groundVelocity = new Vector3(_playerRigidbody.velocity.x, 0f, _playerRigidbody.velocity.z);
+
+        if (_movementSpeed < groundVelocity.magnitude)
+        {
+            Vector3 limitedVelocity = groundVelocity.normalized * _movementSpeed;
+            _playerRigidbody.velocity = new Vector3(limitedVelocity.x, _playerRigidbody.velocity.y, limitedVelocity.z);
+        }
     }
 
     /// <summary>
@@ -96,8 +114,15 @@ public class PlayerController : MonoBehaviour
         Vector3 moveDirection = _playerTransform.forward * userInput.y + _playerTransform.right * userInput.x;
 
         _playerRigidbody.AddForce(_movementSpeed * moveDirection.normalized, ForceMode.Force);
+
+        // Apply ground drag if the player is grounded; otherwise, set the drag to zero.
+        _playerRigidbody.drag = _isGrounded ? _groundDrag : 0f;
     }
 
+    /// <summary>
+    /// Handle the player's input for jumping.
+    /// </summary>
+    /// <param name="context">The input callback context to subscribe/unsubscribe to using the Input System.</param>
     private void HandleJump(InputAction.CallbackContext context)
     {
         if (_isGrounded)
