@@ -2,8 +2,8 @@ using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-// Ensure we have a Rigidbody component as it is required to calculate the movement for every player.
-[RequireComponent(typeof(Rigidbody))]
+//// Ensure we have a Rigidbody component as it is required to calculate the movement for every player.
+[RequireComponent(typeof(CharacterController))]
 public class PlayerController : MonoBehaviour
 {
     [Header("Camera Parameters")]
@@ -12,13 +12,13 @@ public class PlayerController : MonoBehaviour
 
     [Header("Movement Parameters")]
     [SerializeField]
-    private float _groundDrag;
+    private float _gravity;
 
     [SerializeField]
     private float _movementSpeed;
 
     [SerializeField]
-    private float _jumpForce;
+    private float _jumpHeight;
 
     [Header("Player Parameters")]
     [SerializeField]
@@ -28,11 +28,12 @@ public class PlayerController : MonoBehaviour
     private Transform _playerTransform;
 
     [SerializeField]
-    private Rigidbody _playerRigidbody;
+    private CharacterController _playerController;
 
     private bool _isGrounded;
     private float _xRotation; // Keep track of the current rotation of the camera and player on the x-axis.
     private float _yRotation; // Keep track of the current rotation of the camera and player on the y-axis.
+    private Vector3 _playerVelocity; // Keep track of the current position of the camera and player on the y-axis.
     private PlayerControls _playerControls;
 
     /// <summary>
@@ -44,7 +45,6 @@ public class PlayerController : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked; // Keep the cursor locked to the center of the game view.
 
         _playerControls = new PlayerControls();
-        _playerRigidbody.freezeRotation = true;
     }
 
     /// <summary>
@@ -63,26 +63,10 @@ public class PlayerController : MonoBehaviour
     private void Update()
     {
         // Check to see if the player is on the ground or not.
-        // We add 0.25f to the player's position here as an offset to ensure the ray is going through the ground.
-        _isGrounded = Physics.Raycast(_playerTransform.position, Vector3.down, _playerTransform.position.y + 0.25f);
+        _isGrounded = Physics.Raycast(_playerTransform.position, Vector3.down, 1.25f) && _playerVelocity.y <= 0f;
 
-        LimitSpeed();
         HandleLook();
         HandleMovement();
-    }
-
-    /// <summary>
-    /// Limit the character's maximum speed to the movement speed.
-    /// </summary>
-    private void LimitSpeed()
-    {
-        Vector3 groundVelocity = new Vector3(_playerRigidbody.velocity.x, 0f, _playerRigidbody.velocity.z);
-
-        if (_movementSpeed < groundVelocity.magnitude)
-        {
-            Vector3 limitedVelocity = groundVelocity.normalized * _movementSpeed;
-            _playerRigidbody.velocity = new Vector3(limitedVelocity.x, _playerRigidbody.velocity.y, limitedVelocity.z);
-        }
     }
 
     /// <summary>
@@ -113,10 +97,10 @@ public class PlayerController : MonoBehaviour
         Vector2 userInput = _playerControls.Player.Movement.ReadValue<Vector2>();
         Vector3 moveDirection = _playerTransform.forward * userInput.y + _playerTransform.right * userInput.x;
 
-        _playerRigidbody.AddForce(_movementSpeed * moveDirection.normalized, ForceMode.Force);
+        _playerVelocity.y += _gravity * Time.deltaTime;
 
-        // Apply ground drag if the player is grounded; otherwise, set the drag to zero.
-        _playerRigidbody.drag = _isGrounded ? _groundDrag : 0f;
+        _playerController.Move(_movementSpeed * Time.deltaTime * moveDirection);
+        _playerController.Move(_playerVelocity * Time.deltaTime);
     }
 
     /// <summary>
@@ -127,10 +111,8 @@ public class PlayerController : MonoBehaviour
     {
         if (_isGrounded)
         {
-            // Reset the velocity on the y-axis.
-            _playerRigidbody.velocity = new Vector3(_playerRigidbody.velocity.x, 0f, _playerRigidbody.velocity.z);
-
-            _playerRigidbody.AddForce(_playerTransform.up * _jumpForce, ForceMode.Impulse);
+            // Physics equation to calculate the initial jump velocity for reaching a specific height.
+            _playerVelocity.y = (float)Math.Sqrt(-2f * _gravity * _jumpHeight);
         }
     }
 
