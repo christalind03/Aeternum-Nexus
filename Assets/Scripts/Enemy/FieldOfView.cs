@@ -1,7 +1,15 @@
+using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// A sensor representing the field of view for any given gameObject.
+/// This was referenced from TheKiwiCoder's YouTube video about creating a line of sight checking using sensors:
+/// https://www.youtube.com/watch?v=znZXmmyBF-o
+/// </summary>
+[ExecuteInEditMode]
 public class FieldOfView : MonoBehaviour
 {
+    [Header("FOV Properties")]
     [SerializeField]
     private float _angle;
 
@@ -12,30 +20,93 @@ public class FieldOfView : MonoBehaviour
     private float _height;
 
     [SerializeField]
+    private float _heightOffset;
+
+    [SerializeField]
     private int _subdivisionFactor;
 
+    [Header("Scanning Properties")]
+    [SerializeField]
+    private float _scanFrequency;
+
+    [SerializeField]
+    private LayerMask _interestedLayers;
+
+    [SerializeField]
+    private LayerMask _occlusionLayers;
+
+    [Header("Debugging Properties")]
     [SerializeField]
     private Color _meshColor;
 
-    private Mesh _mesh;
+    [SerializeField]
+    private Color _visibleObject;
 
+    private Mesh _mesh;
+    private List<GameObject> _detectedObjects = new List<GameObject>();
+    private Collider[] _detectedColliders = new Collider[50]; // Define some arbitrary number to ensure we have enough space to store results from Physics operations.
+    private int _colliderCount;
+    private float _scanInterval;
+    private float _scanTimer;
+
+    /// <summary>
+    /// Called once per frame to update the scan timer and periodically scan for objects within the vision cone's range.
+    /// </summary>
+    private void Update()
+    {
+        _scanTimer -= Time.deltaTime;
+
+        if (_scanTimer < 0 )
+        {
+            _scanTimer += _scanInterval;
+            ScanObjects();
+        }
+    }
+
+    /// <summary>
+    /// Display boundaries of the vision cone in the scene view and highlight what objects it is able to see.
+    /// </summary>
     private void OnDrawGizmos()
     {
+        // Display the boundaries of the vision cone.
         if (_mesh)
         {
             Gizmos.color = _meshColor;
             Gizmos.DrawMesh(_mesh, transform.position, transform.rotation);
         }
+
+        // Draw a sphere within the detected collider to show that it is within the vision cone's range.
+        Gizmos.DrawWireSphere(transform.position, _distance);
+
+        for (int i = 0; i < _colliderCount; ++i)
+        {
+            // We define some arbitrary radius to display the sphere and ensure that the sensor is working correctly.
+            Gizmos.DrawSphere(_detectedColliders[i].transform.position, 0.15f);
+        }
+
+        // Highlight what objects the vision cone is able to see.
+        foreach (GameObject detectedObject in _detectedObjects)
+        {
+            Gizmos.color = _visibleObject;
+
+            // We define some arbitrary radius to display the sphere and ensure that the sensor is working correctly.
+            Gizmos.DrawSphere(detectedObject.transform.position, 0.15f);
+        }
     }
 
+    /// <summary>
+    /// Called when the script is loaded or when a value changes in the inspector.
+    /// </summary>
     private void OnValidate()
     {
         _mesh = CreateMesh();
+        _scanInterval = 1 / _scanFrequency;
     }
 
     /// <summary>
     /// Dynamically create a vision cone mesh, represented as a wedge, using the input parameters given from the inspector.
     /// </summary>
+    /// <returns>A dynamically generated vision cone mesh shaped as a wedge.</returns>
     private Mesh CreateMesh()
     {
         Mesh wedgeMesh = new Mesh();
@@ -57,6 +128,10 @@ public class FieldOfView : MonoBehaviour
         Vector3 bottomCenter = Vector3.zero;
         Vector3 bottomRight = Quaternion.Euler(0f, _angle, 0f) * Vector3.forward * _distance;
         Vector3 bottomLeft = Quaternion.Euler(0f, -_angle, 0f) * Vector3.forward * _distance;
+
+        bottomCenter.y = _heightOffset;
+        bottomRight.y = _heightOffset;
+        bottomLeft.y = _heightOffset;
 
         Vector3 topCenter = bottomCenter + Vector3.up * _height;
         Vector3 topRight = bottomRight + Vector3.up * _height;
@@ -92,6 +167,9 @@ public class FieldOfView : MonoBehaviour
         {
             bottomRight = Quaternion.Euler(0f, currentAngle + deltaAngle, 0f) * Vector3.forward * _distance;
             bottomLeft = Quaternion.Euler(0f, currentAngle, 0f) * Vector3.forward * _distance;
+
+            bottomRight.y = _heightOffset;
+            bottomLeft.y = _heightOffset;
 
             topRight = bottomRight + Vector3.up * _height;
             topLeft = bottomLeft + Vector3.up * _height;
@@ -129,5 +207,62 @@ public class FieldOfView : MonoBehaviour
         wedgeMesh.RecalculateNormals();
 
         return wedgeMesh;
+    }
+
+    /// <summary>
+    /// Scan for objects within a certain radius of the current gameObject.
+    /// </summary>
+    private void ScanObjects()
+    {
+        _colliderCount = Physics.OverlapSphereNonAlloc(transform.position, _distance, _detectedColliders, _interestedLayers, QueryTriggerInteraction.Collide);
+        _detectedObjects.Clear();
+
+        for (int i = 0; i < _colliderCount; ++i)
+        {
+            GameObject detectedObject = _detectedColliders[i].gameObject;
+            if (IsInSight(detectedObject))
+            {
+                _detectedObjects.Add(detectedObject);
+            }
+        }
+    }
+
+    /// <summary>
+    /// Check to see whether or not a gameObject is within the bounds of the vision cone.
+    /// </summary>
+    /// <param name="obj">The gameObject to check for.</param>
+    /// <returns>Returns true if the object is within the vision cone boundaries; otherwise, false.</returns>
+    private bool IsInSight(GameObject obj)
+    {
+        Vector3 origin = transform.position;
+        Vector3 objectDestination = obj.transform.position;
+        Vector3 objectDirection =  objectDestination - origin;
+
+        // Check if it is within the height of the vision cone.
+        if (objectDirection.y < _heightOffset || objectDirection.y > _height + _heightOffset)
+        {
+            return false;
+        }
+
+        // Check if it is within the angle range of the vision cone.
+        objectDirection.y = 0;
+        float deltaAngle = Vector3.Angle(objectDirection, transform.forward);
+
+        if (_angle < deltaAngle)
+        {
+            return false;
+        }
+
+        // Use a raycast to check if there is an occlusion object in the way.
+        origin.y += (_height / 2) + _heightOffset; // Ensure the raycast's origin height is in the center height of our vision cone
+        objectDestination.y = origin.y;
+
+        if (Physics.Linecast(origin, objectDestination, _occlusionLayers))
+        {
+            return false;
+        }
+
+
+        return true;
     }
 }
