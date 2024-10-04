@@ -391,6 +391,8 @@ GameObject:
   - component: {fileID: 1801597325}
   - component: {fileID: 1801597324}
   - component: {fileID: 1801597328}
+  - component: {fileID: 1801597329}
+  - component: {fileID: 1801597330}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -508,6 +510,35 @@ NavMeshAgent:
   m_BaseOffset: 1
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &1801597329
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1801597323}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d40446537fe52bd4987c26728846b4bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1801597330
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1801597323}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad3659db9748b114099ba46e50a53faf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _angle: 25
+  _distance: 10
+  _height: 1
+  _subdivisionFactor: 10
+  _meshColor: {r: 0.8962264, g: 0.12259703, b: 0.12259703, a: 1}
 --- !u!1 &1859936764
 GameObject:
   m_ObjectHideFlags: 0
