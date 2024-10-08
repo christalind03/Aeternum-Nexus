@@ -10,6 +10,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private float _cameraSensitivity;
 
+    [SerializeField]
+    private Transform _cameraTransform;
+
     [Header("Movement Parameters")]
     [SerializeField]
     private float _gravity;
@@ -20,21 +23,13 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private float _jumpHeight;
 
-    [Header("Player Parameters")]
-    [SerializeField]
-    private Transform _cameraTransform;
-
-    [SerializeField]
-    private Transform _playerTransform;
-
-    [SerializeField]
-    private CharacterController _playerController;
-
     private bool _isGrounded;
     private float _xRotation; // Keep track of the current rotation of the camera and player on the x-axis.
     private float _yRotation; // Keep track of the current rotation of the camera and player on the y-axis.
     private Vector3 _playerVelocity; // Keep track of the current position of the camera and player on the y-axis.
+    private Transform _playerTransform;
     private PlayerControls _playerControls;
+    private CharacterController _playerController;
 
     /// <summary>
     /// Configure the cursor settings and initialize a new instance of PlayerControls when the script is first loaded.
@@ -45,6 +40,8 @@ public class PlayerController : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked; // Keep the cursor locked to the center of the game view.
 
         _playerControls = new PlayerControls();
+        _playerController = GetComponent<CharacterController>();
+        _playerTransform = GetComponent<Transform>();
     }
 
     /// <summary>

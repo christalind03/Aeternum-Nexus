@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2718992414204994250}
   - component: {fileID: 1591095816669681089}
   - component: {fileID: 7430166649025467112}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Player Skin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -118,7 +118,7 @@ GameObject:
   - component: {fileID: 4868161806346852374}
   - component: {fileID: 7715862021892957239}
   - component: {fileID: 6635018781143715025}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -181,12 +181,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _cameraSensitivity: 10
+  _cameraTransform: {fileID: 6748982980914050124}
   _gravity: -12
   _movementSpeed: 10
   _jumpHeight: 1.5
-  _cameraTransform: {fileID: 6748982980914050124}
-  _playerTransform: {fileID: 4868161806346852374}
-  _playerController: {fileID: 7715862021892957239}
 --- !u!1 &7678824220720161727
 GameObject:
   m_ObjectHideFlags: 0
@@ -199,7 +197,7 @@ GameObject:
   - component: {fileID: 1997632367023595998}
   - component: {fileID: 6403167839050279930}
   - component: {fileID: 3460685235570264173}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Camera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
