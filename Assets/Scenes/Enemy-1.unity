@@ -627,9 +627,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d40446537fe52bd4987c26728846b4bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _attackCooldown: 0
+  _attackCooldown: 2.5
   _attackDamage: 0
   _attackRange: 1
+  _playerMask:
+    serializedVersion: 2
+    m_Bits: 8
 --- !u!114 &1801597330
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -643,8 +646,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _angle: 55
-  _distance: 15
-  _height: 2
+  _distance: 5
+  _height: 3
   _heightOffset: -1
   _subdivisionFactor: 5
   _scanFrequency: 35

@@ -7,20 +7,9 @@ public class MeleeEnemyAttackState: MeleeEnemyState
         MeleeEnemyContext Context = context;
     }
 
-    public override void EnterState()
-    {
-        Debug.Log("Entering the attack state...");
-    }
+    public override void EnterState() { }
 
-    public override void ExitState()
-    {
-        Debug.Log("Exiting the attack state...");
-    }
-
-    public override MeleeEnemy.EEnemyState GetNextState()
-    {
-        return StateKey;
-    }
+    public override void ExitState() { }
 
     public override void OnTriggerEnter(Collider otherCollider) { }
     public override void OnTriggerExit(Collider otherCollider) { }
@@ -28,6 +17,7 @@ public class MeleeEnemyAttackState: MeleeEnemyState
 
     public override void UpdateState()
     {
-        Debug.Log("Updating the attack state...");
+        Debug.Log($"Dealt {Context.AttackDamage} damage!");
+        //Debug.Log("Updating the attack state...");
     }
 }
