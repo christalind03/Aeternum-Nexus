@@ -1,23 +1,23 @@
 using UnityEngine;
 
-public class EnemyIdleState : EnemyState
+public class MeleeEnemyChaseState : MeleeEnemyState
 {
-    public EnemyIdleState(EnemyContext context, EnemyStateMachine.EEnemyState estate) : base(context, estate)
+    public MeleeEnemyChaseState(MeleeEnemyContext context, MeleeEnemy.EEnemyState estate) : base(context, estate)
     {
-        EnemyContext Context = context;
+        MeleeEnemyContext Context = context;
     }
 
     public override void EnterState()
     {
-        Debug.Log("Entering the idle state...");
+        Debug.Log("Entering the chase state...");
     }
 
     public override void ExitState()
     {
-        Debug.Log("Exiting the idle state...");
+        Debug.Log("Exiting the chase state...");
     }
 
-    public override EnemyStateMachine.EEnemyState GetNextState()
+    public override MeleeEnemy.EEnemyState GetNextState()
     {
         return StateKey;
     }
@@ -28,6 +28,6 @@ public class EnemyIdleState : EnemyState
 
     public override void UpdateState()
     {
-        Debug.Log("Updating the idle state...");
+        Debug.Log("Updating the chase state...");
     }
 }

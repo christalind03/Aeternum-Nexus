@@ -1,13 +1,13 @@
 using UnityEngine;
 using UnityEngine.AI;
 
-public class EnemyContext
+public class MeleeEnemyContext
 {
     private NavMeshAgent _navMeshAgent;
 
     public NavMeshAgent NavmeshAgent => _navMeshAgent;
 
-    public EnemyContext(NavMeshAgent navMeshAgent)
+    public MeleeEnemyContext(NavMeshAgent navMeshAgent)
     {
         _navMeshAgent = navMeshAgent;
     }

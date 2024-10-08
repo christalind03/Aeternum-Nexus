@@ -9,7 +9,7 @@ using UnityEngine;
 [ExecuteInEditMode]
 public class FieldOfView : MonoBehaviour
 {
-    [Header("FOV Properties")]
+    [Header("Field of View Properties")]
     [SerializeField]
     private float _angle;
 
@@ -44,10 +44,19 @@ public class FieldOfView : MonoBehaviour
 
     private Mesh _mesh;
     private List<GameObject> _detectedObjects = new List<GameObject>();
-    private Collider[] _detectedColliders = new Collider[50]; // Define some arbitrary number to ensure we have enough space to store results from Physics operations.
+    private Collider[] _detectedColliders = new Collider[1]; // Define some arbitrary number to ensure we have enough space to store results from Physics operations.
     private int _colliderCount;
     private float _scanInterval;
     private float _scanTimer;
+
+    public List<GameObject> DetectedObjects
+    {
+        get
+        {
+            _detectedObjects.RemoveAll(obj => !obj); // Remove any null objects
+            return _detectedObjects;
+        }
+    }
 
     /// <summary>
     /// Called once per frame to update the scan timer and periodically scan for objects within the vision cone's range.
@@ -56,7 +65,7 @@ public class FieldOfView : MonoBehaviour
     {
         _scanTimer -= Time.deltaTime;
 
-        if (_scanTimer < 0 )
+        if (_scanTimer < 0)
         {
             _scanTimer += _scanInterval;
             ScanObjects();
@@ -75,17 +84,8 @@ public class FieldOfView : MonoBehaviour
             Gizmos.DrawMesh(_mesh, transform.position, transform.rotation);
         }
 
-        // Draw a sphere within the detected collider to show that it is within the vision cone's range.
-        Gizmos.DrawWireSphere(transform.position, _distance);
-
-        for (int i = 0; i < _colliderCount; ++i)
-        {
-            // We define some arbitrary radius to display the sphere and ensure that the sensor is working correctly.
-            Gizmos.DrawSphere(_detectedColliders[i].transform.position, 0.15f);
-        }
-
         // Highlight what objects the vision cone is able to see.
-        foreach (GameObject detectedObject in _detectedObjects)
+        foreach (GameObject detectedObject in DetectedObjects)
         {
             Gizmos.color = _visibleObject;
 
@@ -232,7 +232,7 @@ public class FieldOfView : MonoBehaviour
     /// </summary>
     /// <param name="obj">The gameObject to check for.</param>
     /// <returns>Returns true if the object is within the vision cone boundaries; otherwise, false.</returns>
-    private bool IsInSight(GameObject obj)
+    public bool IsInSight(GameObject obj)
     {
         Vector3 origin = transform.position;
         Vector3 objectDestination = obj.transform.position;
@@ -262,7 +262,33 @@ public class FieldOfView : MonoBehaviour
             return false;
         }
 
-
         return true;
+    }
+
+    /// <summary>
+    /// Filters detected objects by their layer name.
+    /// </summary>
+    /// <param name="targetObjects">A list of the target objects detected.</param>
+    /// <param name="layerName">The layer name to filter by.</param>
+    /// <returns>Returns the total number of filtered objects detected.</returns>
+    public int FilterObjects(GameObject[] targetObjects, string layerName)
+    {
+        int layerNum = LayerMask.NameToLayer(layerName);
+        int targetIndex = 0;
+
+        foreach (var obj in _detectedObjects)
+        {
+            if (obj.layer == layerNum)
+            {
+                targetObjects[targetIndex++] = obj;
+            }
+
+            if (targetObjects.Length == targetIndex)
+            {
+                break; // Detected object buffer is full
+            }
+        }
+
+        return targetIndex;
     }
 }

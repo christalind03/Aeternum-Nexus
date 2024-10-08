@@ -587,7 +587,7 @@ Transform:
   m_GameObject: {fileID: 1801597323}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 10, y: 1, z: 0}
+  m_LocalPosition: {x: 21.32, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -627,6 +627,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d40446537fe52bd4987c26728846b4bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _attackCooldown: 0
+  _attackDamage: 0
+  _attackRange: 1
 --- !u!114 &1801597330
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -639,20 +642,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad3659db9748b114099ba46e50a53faf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _angle: 25
-  _distance: 10
+  _angle: 55
+  _distance: 15
   _height: 2
   _heightOffset: -1
-  _subdivisionFactor: 10
-  _scanFrequency: 30
+  _subdivisionFactor: 5
+  _scanFrequency: 35
   _interestedLayers:
     serializedVersion: 2
-    m_Bits: 1
+    m_Bits: 8
   _occlusionLayers:
     serializedVersion: 2
     m_Bits: 4
-  _meshColor: {r: 0.8962264, g: 0.12259703, b: 0.12259703, a: 1}
-  _visibleObject: {r: 0.12152922, g: 1, b: 0, a: 1}
+  _meshColor: {r: 1, g: 0, b: 0, a: 0.4509804}
+  _visibleObject: {r: 0, g: 1, b: 0, a: 1}
 --- !u!1 &1859936764
 GameObject:
   m_ObjectHideFlags: 0
