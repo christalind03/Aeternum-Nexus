@@ -8,18 +8,25 @@ using UnityEngine;
 /// https://www.youtube.com/watch?v=qsIiFsddGV4
 /// </summary>
 /// <typeparam name="EState">The enumerable type representing the possible states</typeparam>
+[System.Serializable]
 public abstract class StateManager<EState> : MonoBehaviour where EState : Enum
 {
+    [Header("State Parameters")]
+    [Tooltip("Associates each state with its corresponding behavior")]
+    [SerializeField] protected List<StateEntry<EState>> StateEntries = new List<StateEntry<EState>>();
+    [SerializeField] private EState _defaultState;
+
     protected Dictionary<EState, BaseState<EState>> States = new Dictionary<EState, BaseState<EState>>();
     protected BaseState<EState> CurrentState;
     
-    protected bool _isTransitioningState = false;
+    protected bool IsTransitioningState = false;
 
     /// <summary>
     /// Enter the current state.
     /// </summary>
     private void Start()
     {
+        CurrentState = States[_defaultState];
         CurrentState.EnterState();
     }
 
@@ -28,7 +35,7 @@ public abstract class StateManager<EState> : MonoBehaviour where EState : Enum
     /// </summary>
     private void Update()
     {
-        if (!_isTransitioningState)
+        if (!IsTransitioningState)
         {
             CurrentState.UpdateState();
         }
@@ -69,12 +76,12 @@ public abstract class StateManager<EState> : MonoBehaviour where EState : Enum
     {
         if (stateKey.Equals(CurrentState.StateKey)) return;
 
-        _isTransitioningState = true;
+        IsTransitioningState = true;
 
         CurrentState.ExitState();
         CurrentState = States[stateKey];
         CurrentState.EnterState();
 
-        _isTransitioningState = false;
+        IsTransitioningState = false;
     }
 }

@@ -1,10 +1,12 @@
 using UnityEngine;
 
-public class MeleeEnemyChaseState : MeleeEnemyState
+[CreateAssetMenu(menuName = "BaseState/Enemy/ChaseState")]
+public class EnemyChaseState : EnemyState
 {
-    public MeleeEnemyChaseState(MeleeEnemyContext context, MeleeEnemy.EEnemyState estate) : base(context, estate)
+    public void Initalize(EnemyContext context, Enemy.EEnemyState estate)
     {
-        MeleeEnemyContext Context = context;
+        Context = context;
+        base.Initialize(context, estate);
     }
 
     public override void EnterState() { }
@@ -24,7 +26,7 @@ public class MeleeEnemyChaseState : MeleeEnemyState
             Transform playerTransform = Context.FieldOfView.DetectedObjects[0].transform;
 
             // This is separated from state logic because we always want to look at the player if they're within the enemy's field of view.
-            Context.CurrentTransform.LookAt(playerTransform.position);
+            Context.Transform.LookAt(playerTransform.position);
             Context.NavMeshAgent.SetDestination(playerTransform.position);
         }
     }

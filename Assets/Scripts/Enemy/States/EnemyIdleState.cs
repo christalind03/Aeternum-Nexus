@@ -1,23 +1,29 @@
 using UnityEngine;
 
-public class MeleeEnemyIdleState : MeleeEnemyState
+[CreateAssetMenu(menuName="BaseState/Enemy/IdleState")]
+[System.Serializable]
+public class EnemyIdleState : EnemyState
 {
-    private readonly float _offsetAngle = 45f;
-    private readonly float _rotationSpeed = 1.5f;
+    [SerializeField] private float _offsetAngle = 45f;
+    [SerializeField] private float _rotationSpeed = 1.5f;
 
     private Quaternion _targetRotation;
-    private bool _hasTargetRotation = false; 
-    private bool _isReset = true;
+    private bool _hasTargetRotation; 
+    private bool _isReset;
 
-    public MeleeEnemyIdleState(MeleeEnemyContext context, MeleeEnemy.EEnemyState estate) : base(context, estate)
+    public void Initalize(EnemyContext context, Enemy.EEnemyState estate)
     {
-        MeleeEnemyContext Context = context;
+        Context = context;
+        base.Initialize(context, estate);
+
+        _hasTargetRotation = false;
+        _isReset = true;
     }
 
     public override void EnterState()
     {
-        bool hasInitialPosition = Context.InitialPosition == Context.CurrentTransform.position;
-        bool hasInitialRotation = Context.InitialRotation == Context.CurrentTransform.rotation;
+        bool hasInitialPosition = Context.InitialPosition == Context.Transform.position;
+        bool hasInitialRotation = Context.InitialRotation == Context.Transform.rotation;
 
         _isReset = hasInitialPosition && hasInitialRotation;
 
@@ -35,14 +41,14 @@ public class MeleeEnemyIdleState : MeleeEnemyState
         if (!_isReset)
         {
             // We would set this to be Context.InitialPosition == Context.CurrentTransform.position, but due to floating point values we have to calculate its distance instead.
-            if (Vector3.Distance(Context.InitialPosition, Context.CurrentTransform.position) < 0.1f)
+            if (Vector3.Distance(Context.InitialPosition, Context.Transform.position) < 0.1f)
             {
                 // Rotate the enemy back to its original rotation
-                Context.CurrentTransform.rotation = Quaternion.Slerp(Context.CurrentTransform.rotation, Context.InitialRotation, _rotationSpeed * Time.deltaTime);
+                Context.Transform.rotation = Quaternion.Slerp(Context.Transform.rotation, Context.InitialRotation, _rotationSpeed * Time.deltaTime);
             }
 
             // We would set this to be Context.InitialRotation == Context.CurrentTransform.rotation, but due to floating point values we have to calculate its distance instead.
-            if (Context.InitialRotation == Context.CurrentTransform.rotation)
+            if (Context.InitialRotation == Context.Transform.rotation)
             {
                 _isReset = true;
             }
@@ -52,10 +58,10 @@ public class MeleeEnemyIdleState : MeleeEnemyState
             if (_hasTargetRotation)
             {
                 // Rotate the enemy back to its original rotation
-                Context.CurrentTransform.rotation = Quaternion.Slerp(Context.CurrentTransform.rotation, _targetRotation, _rotationSpeed * Time.deltaTime);
+                Context.Transform.rotation = Quaternion.Slerp(Context.Transform.rotation, _targetRotation, _rotationSpeed * Time.deltaTime);
 
                 // We would set this to be _targetRotation == Context.CurrentTransform.rotation, but due to floating point values we have to calculate its distance instead.
-                if (Quaternion.Angle(_targetRotation, Context.CurrentTransform.rotation) < 0.1f)
+                if (Quaternion.Angle(_targetRotation, Context.Transform.rotation) < 0.1f)
                 {
                     _hasTargetRotation = false;
                 }

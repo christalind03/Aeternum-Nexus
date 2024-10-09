@@ -1,61 +1,9 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AI;
 
-[RequireComponent(typeof(NavMeshAgent))]
-public class MeleeEnemy : StateManager<MeleeEnemy.EEnemyState>
+public class MeleeEnemy : Enemy
 {
-    public enum EEnemyState
-    {
-        Attack,
-        Chase,
-        Idle,
-    }
-
-    [Header("Attack Parameters")]
-    [SerializeField]
-    private float _attackCooldown;
-
-    [SerializeField]
-    private float _attackDamage;
-
-    [SerializeField]
-    private float _attackRange;
-
-    [Header("Layer Masks")]
-    [SerializeField]
-    private LayerMask _playerMask;
-
-    private Vector3 _initialPosition;
-    private Quaternion _initialRotation;
-    private FieldOfView _fieldOfView;
-    private NavMeshAgent _navMeshAgent;
-
-    private MeleeEnemyContext _context;
-    private bool _canAttack;
-
-    private void Awake()
-    {
-        _initialPosition = transform.position;
-        _initialRotation = transform.rotation;
-        _fieldOfView = GetComponent<FieldOfView>();
-        _navMeshAgent = GetComponent<NavMeshAgent>();
-
-        _context = new MeleeEnemyContext(_attackDamage, _initialPosition, _initialRotation, transform, _fieldOfView, _navMeshAgent);
-        _canAttack = true;
-
-        InitializeStates();
-    }
-
-    private void InitializeStates()
-    {
-        States.Add(EEnemyState.Attack, new MeleeEnemyAttackState(_context, EEnemyState.Attack));
-        States.Add(EEnemyState.Chase, new MeleeEnemyChaseState(_context, EEnemyState.Chase));
-        States.Add(EEnemyState.Idle, new MeleeEnemyIdleState(_context, EEnemyState.Idle));
-
-        CurrentState = States[EEnemyState.Idle];
-    }
-
     private void FixedUpdate()
     {
         if (0 < _fieldOfView.DetectedObjects.Count)
@@ -71,8 +19,9 @@ public class MeleeEnemy : StateManager<MeleeEnemy.EEnemyState>
                 TransitionToState(EEnemyState.Attack);
 
                 _canAttack = false;
-                StartCoroutine(TriggerAttackCooldown());
-            } else
+                StartCoroutine(AttackCooldown());
+            }
+            else
             {
                 TransitionToState(EEnemyState.Chase);
             }
@@ -81,11 +30,5 @@ public class MeleeEnemy : StateManager<MeleeEnemy.EEnemyState>
         {
             TransitionToState(EEnemyState.Idle);
         }
-    }
-
-    private IEnumerator TriggerAttackCooldown()
-    {
-        yield return new WaitForSeconds(_attackCooldown);
-        _canAttack = true;
     }
 }

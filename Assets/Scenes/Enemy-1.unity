@@ -496,7 +496,7 @@ GameObject:
   - component: {fileID: 1801597325}
   - component: {fileID: 1801597324}
   - component: {fileID: 1801597328}
-  - component: {fileID: 1801597329}
+  - component: {fileID: 1801597331}
   - component: {fileID: 1801597330}
   m_Layer: 0
   m_Name: Enemy
@@ -615,24 +615,6 @@ NavMeshAgent:
   m_BaseOffset: 1
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!114 &1801597329
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1801597323}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d40446537fe52bd4987c26728846b4bb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _attackCooldown: 2.5
-  _attackDamage: 0
-  _attackRange: 1
-  _playerMask:
-    serializedVersion: 2
-    m_Bits: 8
 --- !u!114 &1801597330
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -659,6 +641,32 @@ MonoBehaviour:
     m_Bits: 4
   _meshColor: {r: 1, g: 0, b: 0, a: 0.4509804}
   _visibleObject: {r: 0, g: 1, b: 0, a: 1}
+--- !u!114 &1801597331
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1801597323}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81582dfebfe5e3d4abe8681d56e5e479, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  StateEntries:
+  - Key: 0
+    Value: {fileID: 11400000, guid: 4503b5afc8d38f84281e630c36b23495, type: 2}
+  - Key: 1
+    Value: {fileID: 11400000, guid: efe4d032ed8d5fc4b8f447f82b143275, type: 2}
+  - Key: 2
+    Value: {fileID: 11400000, guid: 47524f1a52fab874a906e69c7ff477d7, type: 2}
+  _defaultState: 2
+  _attackCooldown: 2.5
+  _attackDamage: 5
+  _attackRange: 1
+  _playerMask:
+    serializedVersion: 2
+    m_Bits: 8
 --- !u!1 &1859936764
 GameObject:
   m_ObjectHideFlags: 0
