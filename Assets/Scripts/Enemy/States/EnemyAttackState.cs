@@ -1,9 +1,10 @@
+using System;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "BaseState/Enemy/AttackState")]
-public class EnemyAttackState: EnemyState
+public class EnemyAttackState<EState>: EnemyState<EState> where EState : Enum
 {
-    public void Initalize(EnemyContext context, Enemy.EEnemyState estate)
+    public void Initalize(EnemyContext context, EState estate)
     {
         Context = context;
         base.Initialize(context, estate);

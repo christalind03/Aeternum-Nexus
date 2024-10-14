@@ -9,6 +9,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0dd09e436a189874d8a504099f12f464, type: 3}
-  m_Name: EnemyAttackState
+  m_Script: {fileID: 11500000, guid: dc52319e395b70d4fae4e53cf9dc6864, type: 3}
+  m_Name: Chase State
   m_EditorClassIdentifier: 
