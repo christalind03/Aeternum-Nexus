@@ -3,6 +3,7 @@ using UnityEngine.AI;
 
 public class EnemyContext
 {
+    public readonly float AttackCooldown;
     public readonly float AttackDamage;
 
     public readonly Vector3 InitialPosition;
@@ -12,8 +13,9 @@ public class EnemyContext
     public readonly FieldOfView FieldOfView;
     public readonly NavMeshAgent NavMeshAgent;
 
-    public EnemyContext(float attackDamage, Vector3 initialPosition, Quaternion initialRotation, Transform transform, FieldOfView fieldOfView, NavMeshAgent navMeshAgent)
+    public EnemyContext(float attackCooldown, float attackDamage, Vector3 initialPosition, Quaternion initialRotation, Transform transform, FieldOfView fieldOfView, NavMeshAgent navMeshAgent)
     {
+        AttackCooldown = attackCooldown;
         AttackDamage = attackDamage;
         
         InitialPosition = initialPosition;

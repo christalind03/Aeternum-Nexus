@@ -2,15 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MeleeEnemy : Enemy<MeleeEnemy.EEnemyState>
+public class RangedEnemy : Enemy<RangedEnemy.EEnemyState>
 {
     public enum EEnemyState
     {
         Attack,
-        Chase,
-        Idle
+        Flee,
+        Idle,
     }
-    
+
+    [Header("Flee Properties")]
+    [SerializeField] private float _fleeRange;
+
     private void FixedUpdate()
     {
         if (0 < _fieldOfView.DetectedObjects.Count)
@@ -21,16 +24,13 @@ public class MeleeEnemy : Enemy<MeleeEnemy.EEnemyState>
             // This is separated from state logic because we always want to look at the player if they're within the enemy's field of view.
             transform.LookAt(playerTransform.position);
 
-            if (_canAttack && CurrentState.StateKey.Equals(EEnemyState.Chase) && Physics.CheckSphere(transform.position, _attackRange, _playerMask))
+            if (Physics.CheckSphere(transform.position, _fleeRange, _playerMask))
             {
-                TransitionToState(EEnemyState.Attack);
-
-                _canAttack = false;
-                StartCoroutine(AttackCooldown());
+                TransitionToState(EEnemyState.Flee);
             }
             else
             {
-                TransitionToState(EEnemyState.Chase);
+                TransitionToState(EEnemyState.Attack);
             }
         }
         else

@@ -1,0 +1,121 @@
+[33mcommit 5e9919e777ff50e7dc4a204e2a00fec87badbf72[m[33m ([m[1;36mHEAD -> [m[1;32mfeat/enemy-1[m[33m, [m[1;31morigin/feat/enemy-1[m[33m)[m
+Author: Christalin Dorsey <christalin.dorsey03@gmail.com>
+Date:   Wed Oct 9 13:16:19 2024 -0700
+
+    Modularize enemy state machine
+
+[33mcommit e09b0ce447fbdd808506f97f33ed4ffee09d53fa[m
+Author: Christalin Dorsey <christalin.dorsey03@gmail.com>
+Date:   Tue Oct 8 11:21:51 2024 -0700
+
+    Implement basic enemy behavior
+
+[33mcommit 4b9c5fec6c9d162d51e55187b483b48e8f2784a5[m
+Author: Christalin Dorsey <christalin.dorsey03@gmail.com>
+Date:   Mon Oct 7 21:31:37 2024 -0700
+
+    If the player is in the enemy's vision cone, follow the player
+
+[33mcommit 7aaf1def861337179328f427f5373dcacaffb5c4[m
+Author: Christalin Dorsey <christalin.dorsey03@gmail.com>
+Date:   Fri Oct 4 14:12:57 2024 -0700
+
+    Implement sensor for visible objects within the FOV
+
+[33mcommit 20e5c3f54ba21f6fea48cb6145dea4c120149eb9[m
+Author: Christalin Dorsey <christalin.dorsey03@gmail.com>
+Date:   Fri Oct 4 02:27:24 2024 -0700
+
+    Create customizable FOV debug mesh
+
+[33mcommit 5d5ab8ce1ce1cd72cdb0776e794ca8a9930d4d69[m
+Author: Christalin Dorsey <christalin.dorsey03@gmail.com>
+Date:   Thu Oct 3 23:00:22 2024 -0700
+
+    Implement enemy state machine
+
+[33mcommit a501be89be8821d5492a6c3a5fd64d84225148ca[m
+Author: Christalin Dorsey <christalin.dorsey03@gmail.com>
+Date:   Thu Oct 3 21:41:38 2024 -0700
+
+    Implement reusable finite state machine for general use
+
+[33mcommit 4881f0a2746b45048f4574eb593bc72c9c3ca2f9[m[33m ([m[1;31morigin/develop[m[33m, [m[1;32mdevelop[m[33m)[m
+Merge: c23fc99 1af43bc
+Author: Christalin Dorsey <christalin.d03@gmail.com>
+Date:   Sun Sep 22 13:54:05 2024 -0700
+
+    Merge pull request #18 from christalind03/feat/player-controller
+
+[33mcommit 1af43bc5654d077517a62431bb7427c585e72638[m[33m ([m[1;32mfeat/player-controller[m[33m)[m
+Author: Christalin Dorsey <christalin.dorsey03@gmail.com>
+Date:   Wed Sep 18 19:39:14 2024 -0700
+
+    Create Player prefab
+
+[33mcommit ce227ae453bbcac850e4aee857cbbc390cc09ef2[m
+Author: Christalin Dorsey <christalin.dorsey03@gmail.com>
+Date:   Wed Sep 18 19:29:53 2024 -0700
+
+    Convert Rigidbody controller to CharacterController controller to reduce jittering
+
+[33mcommit 3527246fd9bc1f4edf9a69caf2616d67f4c76fdb[m
+Author: Christalin Dorsey <christalin.dorsey03@gmail.com>
+Date:   Wed Sep 18 17:21:29 2024 -0700
+
+    Apply additional movement physics such as drag and limiting the player's maximum speed
+
+[33mcommit c51f4e335ddd9dc14859444ca3d8c50030992cf5[m
+Author: Christalin Dorsey <christalin.dorsey03@gmail.com>
+Date:   Wed Sep 18 16:56:28 2024 -0700
+
+    Implement jump controls for KBM
+
+[33mcommit fa1480d78469facb8821702891461b0a271393b3[m
+Author: Christalin Dorsey <christalin.dorsey03@gmail.com>
+Date:   Wed Sep 18 16:30:54 2024 -0700
+
+    Implement movement controls for KBM
+
+[33mcommit 36204fca1bce0de0843b5996a1e37b5e35aaed3e[m
+Merge: 7fd3f75 2287be9
+Author: Christalin Dorsey <christalin.dorsey03@gmail.com>
+Date:   Wed Sep 18 16:00:39 2024 -0700
+
+    Merge branch 'main' into feat/player-controller
+
+[33mcommit 7fd3f75de364b8b563648427b8e13e3039032ab3[m
+Author: Christalin Dorsey <christalin.dorsey03@gmail.com>
+Date:   Wed Sep 18 15:57:32 2024 -0700
+
+    Implement camera controls for KBM
+
+[33mcommit 2287be92231a5424144204a182ce0733b2f2508d[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mmain[m[33m, [m[1;32mfeat/title-screen[m[33m)[m
+Author: ItsAlexMedal <123974738+ItsAlexMedal@users.noreply.github.com>
+Date:   Fri Sep 13 14:26:09 2024 -0700
+
+    Rename TextCommitAM to TextCommitAM.txt
+
+[33mcommit e281d1e06c0c5fbaf2215082b7e3340ea5b0e4f2[m
+Author: ItsAlexMedal <123974738+ItsAlexMedal@users.noreply.github.com>
+Date:   Fri Sep 13 14:25:02 2024 -0700
+
+    Create TextCommitAM
+
+[33mcommit 204b0a25a9e2cf82a0607c8839ec08a4d1989009[m
+Author: BlKoolaid <98129804+BlKoolaid@users.noreply.github.com>
+Date:   Fri Sep 13 14:22:19 2024 -0700
+
+    Create TextCommitTA.txt
+
+[33mcommit 111587183a7ff4f43d00e723ff9ddeff41a7dfb0[m
+Author: Christalin Dorsey <christalin.dorsey03@gmail.com>
+Date:   Fri Sep 13 14:20:27 2024 -0700
+
+    Create TestCommitCD.txt
+
+[33mcommit c23fc99e6f713c168d4820de081443936e3bcb20[m
+Author: Christalin Dorsey <christalin.dorsey03@gmail.com>
+Date:   Fri Sep 6 15:02:48 2024 -0700
+
+    Initialize Unity Project

@@ -1,9 +1,9 @@
+using System;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "BaseState/Enemy/ChaseState")]
-public class EnemyChaseState : EnemyState
+public class EnemyChaseState<EState> : EnemyState<EState> where EState : Enum
 {
-    public void Initalize(EnemyContext context, Enemy.EEnemyState estate)
+    public void Initalize(EnemyContext context, EState estate)
     {
         Context = context;
         base.Initialize(context, estate);

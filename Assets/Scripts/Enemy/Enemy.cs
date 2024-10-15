@@ -1,18 +1,12 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
 [RequireComponent(typeof(FieldOfView), typeof(NavMeshAgent))]
-public class Enemy : StateManager<Enemy.EEnemyState>
+public class Enemy<EState> : StateManager<EState> where EState : Enum
 {
-    public enum EEnemyState
-    {
-        Attack,
-        Chase,
-        Idle
-    }
-
     [Header("Attack Parameters")]
     [SerializeField] protected float _attackCooldown;
     [SerializeField] protected float _attackDamage;
@@ -38,7 +32,7 @@ public class Enemy : StateManager<Enemy.EEnemyState>
         _fieldOfView = GetComponent<FieldOfView>();
         _navMeshAgent = GetComponent<NavMeshAgent>();
 
-        _context = new EnemyContext(_attackDamage, _initialPosition, _initialRotation, transform, _fieldOfView, _navMeshAgent);
+        _context = new EnemyContext(_attackCooldown, _attackDamage, _initialPosition, _initialRotation, transform, _fieldOfView, _navMeshAgent);
         _canAttack = true;
 
         InitializeStates();
@@ -46,15 +40,13 @@ public class Enemy : StateManager<Enemy.EEnemyState>
 
     private void InitializeStates()
     {
-        foreach (StateEntry<Enemy.EEnemyState> stateEntry in StateEntries)
+        foreach (StateEntry<EState> stateEntry in StateEntries)
         {
-            Enemy.EEnemyState stateEntryKey = stateEntry.Key;
-            BaseState<Enemy.EEnemyState> stateEntryValue = stateEntry.Value;
+            EState stateEntryKey = stateEntry.Key;
+            EnemyState<EState> stateEntryValue = (EnemyState<EState>)stateEntry.Value;
 
-            var stateInstance = (EnemyState)ScriptableObject.CreateInstance(stateEntryValue.GetType());
-            stateInstance.Initialize(_context, stateEntryKey);
-
-            States.Add(stateEntryKey, stateInstance);
+            stateEntryValue.Initialize(_context, stateEntryKey);
+            States.Add(stateEntryKey, stateEntryValue);
         }
     }
 

@@ -1,17 +1,17 @@
+using System;
 using UnityEngine;
 
-[CreateAssetMenu(menuName="BaseState/Enemy/IdleState")]
 [System.Serializable]
-public class EnemyIdleState : EnemyState
+public class EnemyIdleState<EState> : EnemyState<EState> where EState : Enum
 {
-    [SerializeField] private float _offsetAngle = 45f;
-    [SerializeField] private float _rotationSpeed = 1.5f;
+    [SerializeField] private float _offsetAngle;
+    [SerializeField] private float _rotationSpeed;
 
     private Quaternion _targetRotation;
     private bool _hasTargetRotation; 
     private bool _isReset;
 
-    public void Initalize(EnemyContext context, Enemy.EEnemyState estate)
+    public void Initalize(EnemyContext context, EState estate)
     {
         Context = context;
         base.Initialize(context, estate);
@@ -70,7 +70,7 @@ public class EnemyIdleState : EnemyState
             {
                 Vector3 eulerAngle = Context.InitialRotation.eulerAngles;
 
-                float targetAngle = Random.Range(eulerAngle.y - _offsetAngle, eulerAngle.y + _offsetAngle);
+                float targetAngle = UnityEngine.Random.Range(eulerAngle.y - _offsetAngle, eulerAngle.y + _offsetAngle);
                 _targetRotation = Quaternion.Euler(0f, targetAngle, 0f);
 
                 _hasTargetRotation = true;
