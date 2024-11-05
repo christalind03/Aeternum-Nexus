@@ -7,6 +7,9 @@ public class Health : MonoBehaviour
     [SerializeField] private float _maximumHealth;
     [SerializeField] private float _currentHealth; // Temporarily serialize the field to ensure health-related functionalities work properly
 
+    public float MaximumHealth { get { return _maximumHealth; } }
+    public float CurrentHealth { get { return _currentHealth; } }
+
     private void Start()
     {
         _currentHealth = _maximumHealth;

@@ -56,7 +56,7 @@ public class Enemy<EState> : StateManager<EState> where EState : Enum
 
     private void OnTriggerEnter(Collider otherCollider)
     {
-        if (_initialAttackDamage == _attackDamage && otherCollider.gameObject.TryGetComponent<SupportDevice>(out SupportDevice supportDevice))
+        if (_initialAttackDamage == _attackDamage && otherCollider.gameObject.TryGetComponent<AttackBufferDevice>(out AttackBufferDevice supportDevice))
         {
             _attackDamage += _attackDamage * supportDevice.Percentage;
             StartCoroutine(ResetAttackDamage(supportDevice.Duration));

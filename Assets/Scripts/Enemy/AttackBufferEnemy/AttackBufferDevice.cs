@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SupportDevice : MonoBehaviour
+public class AttackBufferDevice : MonoBehaviour
 {
     public float Duration;
     public float Percentage;
