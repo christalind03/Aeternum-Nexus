@@ -24,8 +24,6 @@ public class Enemy<EState> : StateManager<EState> where EState : Enum
     protected EnemyContext _context;
     protected bool _canAttack;
 
-    private float _initialAttackDamage;
-
     private void Awake()
     {
         _initialPosition = transform.position;
@@ -36,8 +34,6 @@ public class Enemy<EState> : StateManager<EState> where EState : Enum
 
         _context = new EnemyContext(_attackCooldown, _attackDamage, _initialPosition, _initialRotation, transform, _fieldOfView, _navMeshAgent);
         _canAttack = true;
-
-        _initialAttackDamage = _attackDamage;
 
         InitializeStates();
     }
@@ -54,24 +50,9 @@ public class Enemy<EState> : StateManager<EState> where EState : Enum
         }
     }
 
-    private void OnTriggerEnter(Collider otherCollider)
-    {
-        if (_initialAttackDamage == _attackDamage && otherCollider.gameObject.TryGetComponent<AttackBufferDevice>(out AttackBufferDevice supportDevice))
-        {
-            _attackDamage += _attackDamage * supportDevice.Percentage;
-            StartCoroutine(ResetAttackDamage(supportDevice.Duration));
-        }
-    }
-
     protected IEnumerator AttackCooldown()
     {
         yield return new WaitForSeconds(_attackCooldown);
         _canAttack = true;
-    }
-
-    private IEnumerator ResetAttackDamage(float delay)
-    {
-        yield return new WaitForSeconds(delay);
-        _attackDamage = _initialAttackDamage;
     }
 }

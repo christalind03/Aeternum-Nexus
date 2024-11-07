@@ -26,7 +26,6 @@ public class PlayerController : MonoBehaviour
     private bool _isGrounded;
     private float _xRotation; // Keep track of the current rotation of the camera and player on the x-axis.
     private float _yRotation; // Keep track of the current rotation of the camera and player on the y-axis.
-    private RaycastHit _raycastHit;
     private Vector3 _playerVelocity; // Keep track of the current position of the camera and player on the y-axis.
     private Transform _playerTransform;
     private PlayerControls _playerControls;
@@ -53,7 +52,6 @@ public class PlayerController : MonoBehaviour
         _playerControls.Enable();
 
         _playerControls.Player.Jump.performed += HandleJump;
-        _playerControls.Player.Shoot.performed += Shoot;
     }
 
     /// <summary>
@@ -84,10 +82,7 @@ public class PlayerController : MonoBehaviour
 
         // Since we have not yet implemented character models, we will only rotate the entire character on the y-axis.
         // This logic may change to display the character looking upwards once a character model is implemented.
-        _playerTransform.rotation = Quaternion.Euler(0, _yRotation, 0);
-
-        // Check to see if we're looking at anything of importance.
-        Physics.Raycast(_cameraTransform.position, _cameraTransform.forward, out _raycastHit);
+        _playerTransform.rotation = Quaternion.Euler(0, _yRotation, 0); 
     }
 
     /// <summary>
@@ -115,19 +110,6 @@ public class PlayerController : MonoBehaviour
         {
             // Physics equation to calculate the initial jump velocity for reaching a specific height.
             _playerVelocity.y = (float)Math.Sqrt(-2f * _gravity * _jumpHeight);
-        }
-    }   
-    
-    private void Shoot(InputAction.CallbackContext context)
-    {
-        if (_raycastHit.collider != null)
-        {
-            GameObject hitObject = _raycastHit.collider.gameObject;
-
-            if (hitObject.TryGetComponent<Health>(out Health enemyHealth))
-            {
-                enemyHealth.RemoveHealth(10); // This static number should change to the weapon damage.
-            }
         }
     }
 
