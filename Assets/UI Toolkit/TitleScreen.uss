@@ -1,0 +1,19 @@
+.button {
+    -unity-font: url("project://database/Assets/Fonts/sdglitchdemo.regular.ttf?fileID=12800000&guid=cf91e8dcc03ceb142a98d0f2853fe6cc&type=3#sdglitchdemo.regular");
+    -unity-font-definition: initial;
+    font-size: 125px;
+    -unity-text-align: middle-left;
+    border-left-color: rgba(0, 0, 0, 0);
+    border-right-color: rgba(0, 0, 0, 0);
+    border-top-color: rgba(0, 0, 0, 0);
+    border-bottom-color: rgba(0, 0, 0, 0);
+    flex-shrink: 0;
+    align-self: auto;
+    background-color: rgba(0, 0, 0, 0);
+    color: rgb(255, 255, 255);
+    transition-duration: 0.35s;
+}
+
+.button:hover {
+    font-size: 150px;
+}
