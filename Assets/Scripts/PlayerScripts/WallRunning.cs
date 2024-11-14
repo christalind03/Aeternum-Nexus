@@ -103,6 +103,18 @@ public class Wallrunning : MonoBehaviour
             {
                 StartWallRun();
             }
+
+            if (wallRunTimer > 0)
+            {
+                wallRunTimer -= Time.deltaTime;
+            }
+            if (wallRunTimer <= 0 && playerMovement.isWallRunning)
+            {   
+                exitingWall = true;
+                exitWallTimer = exitWallTime;
+            }
+
+
             if (jumpAction.WasPressedThisFrame())
             {
                 WallJump();
