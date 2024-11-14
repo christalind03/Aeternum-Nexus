@@ -2,31 +2,37 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
-public class MeleeControl : MonoBehaviour
+public class MeleeController : MonoBehaviour
 {
     [Header("References")]
     public GameObject sword;
     public GameObject player;
-    PlayerMovement playerMovement;
+    public InputActionAsset playerControls;
+    InputAction swingAction;
 
     [Header("Conditions")]
     public bool canAttack = true;
     public bool isAttacking = false;
+
+    [Header("Modifiers")]
     public float attackCooldown = 1f;
+    public float damage = 15;
     // public AudioClip attackSound;
 
     // Start is called before the first frame update
     void Start()
     {
-        playerMovement = player.GetComponent<PlayerMovement>();
+        swingAction = playerControls.FindActionMap("Combat").FindAction("Attack");
+        swingAction.Enable(); // ????
     }
 
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (swingAction.WasPressedThisFrame())
         {
             if (canAttack)
             {

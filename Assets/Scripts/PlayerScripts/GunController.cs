@@ -1,11 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class GunController : MonoBehaviour
 {
     [Header("Stats")]
-    public int damage;
+    public float damage;
     public float fireRate, timeBetweenShots, range;
     public bool allowButtonHold;
 
@@ -16,7 +17,9 @@ public class GunController : MonoBehaviour
     public Transform attackPoint;
     public RaycastHit raycastHit;
     public LayerMask whatIsEnemy;
-    
+    public InputActionAsset playerControls;
+    InputAction shootAction;
+
     [Header("Graphics")]
     public GameObject muzzleFlash;
 
@@ -24,6 +27,7 @@ public class GunController : MonoBehaviour
     void Start()
     {
         isReadyToFire = true;
+        shootAction = playerControls.FindActionMap("Combat").FindAction("Attack");
     }
 
     // Update is called once per frame
@@ -34,7 +38,7 @@ public class GunController : MonoBehaviour
 
     void GunInput()
     {
-        isShooting = allowButtonHold ? Input.GetKey(KeyCode.Mouse0) : Input.GetKeyDown(KeyCode.Mouse0);
+        isShooting = allowButtonHold ? shootAction.IsPressed() : shootAction.WasPressedThisFrame();
         if (isReadyToFire && isShooting)
         {
             Debug.Log("shot gun");

@@ -218,9 +218,18 @@
             "id": "b35291bd-e423-43ae-92cf-0524e1a9e3e5",
             "actions": [
                 {
-                    "name": "Fire",
+                    "name": "Attack",
                     "type": "Button",
                     "id": "ee3bd6be-3f71-469e-8f82-6b0c920bbaec",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Switch Weapon",
+                    "type": "Button",
+                    "id": "040a41db-4e8a-498f-85ec-c92850b6ece1",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -230,56 +239,34 @@
             "bindings": [
                 {
                     "name": "",
-                    "id": "06973379-5c2c-4084-b779-2ac2b74b36c8",
-                    "path": "<Gamepad>/rightTrigger",
+                    "id": "d04cb4ee-44ac-4dac-94fb-283b9ec67c43",
+                    "path": "<Keyboard>/q",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Gamepad",
-                    "action": "Fire",
+                    "groups": "",
+                    "action": "Switch Weapon",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
-                    "id": "9d1bc02b-87f4-4fee-af3e-dcf8c905aeeb",
+                    "id": "f0ba7f33-8573-4e1c-8e46-a4a018d9f2e4",
+                    "path": "<Mouse>/scroll/y",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Switch Weapon",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "2c6af5bc-e950-45f1-8b93-0c5bd7554c79",
                     "path": "<Mouse>/leftButton",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Keyboard&Mouse",
-                    "action": "Fire",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "92043094-7a4a-4aa3-90ed-4d715feafb0a",
-                    "path": "<Touchscreen>/primaryTouch/tap",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Touch",
-                    "action": "Fire",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "337a6579-e8d5-45f2-ac6f-b1ba75044db9",
-                    "path": "<Joystick>/trigger",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Joystick",
-                    "action": "Fire",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "d7fd8881-7623-4351-bd8b-268a5cf4d2e3",
-                    "path": "<XRController>/{PrimaryAction}",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "XR",
-                    "action": "Fire",
+                    "groups": "",
+                    "action": "Attack",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
