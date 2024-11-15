@@ -4,3 +4,10 @@
     background-color: rgb(147, 64, 64);
     -unity-background-image-tint-color: rgb(111, 0, 0);
 }
+
+.button {
+}
+
+.button:hover {
+    opacity: 0;
+}
