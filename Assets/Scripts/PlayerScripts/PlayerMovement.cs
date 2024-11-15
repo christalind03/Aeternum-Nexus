@@ -47,6 +47,8 @@ public class PlayerMovement : MonoBehaviour
     
     public Transform orientation;
     public InputActionAsset playerControls;
+    public GameObject sword;
+    Animator animatorObj;
 
     float horizontalInput;
     float verticalInput;
@@ -91,6 +93,8 @@ public class PlayerMovement : MonoBehaviour
         playerBody = GetComponent<Rigidbody>();
         normalYScale = transform.localScale.y;
         normalSpeed = playerSpeed;
+
+        animatorObj = sword.GetComponent<Animator>();
 
         playerBody.freezeRotation = true; // removes physics engine's control over the rigidbody
         canJump = true;
@@ -156,9 +160,11 @@ public class PlayerMovement : MonoBehaviour
         {
             state = MovementState.dashing;
             desiredMoveSpeed = dashSpeed;
+            animatorObj.SetBool("isMoving", true);
         }
         else if (playerBody.velocity.magnitude < 3 && horizontalInput == 0 && verticalInput == 0 && !isCrouching) // standing state
         {
+            animatorObj.SetBool("isMoving", false);
             state = MovementState.standing;
             desiredMoveSpeed = normalSpeed;
         }
@@ -166,9 +172,11 @@ public class PlayerMovement : MonoBehaviour
         {
             state = MovementState.wallrunning;
             desiredMoveSpeed = wallRunSpeed;
+            animatorObj.SetBool("isMoving", true);
         }
         else if (isSliding) // sliding state
         {
+            animatorObj.SetBool("isMoving", true);
             state = MovementState.sliding;
 
             if (OnSlope() && playerBody.velocity.y < 0.1f)
@@ -182,17 +190,28 @@ public class PlayerMovement : MonoBehaviour
         }
         else if (isCrouching) // crouched state
         {
+            if (horizontalInput == 0 && verticalInput == 0)
+            {
+                animatorObj.SetBool("isMoving", false);
+            }
+            else
+            {
+                animatorObj.SetBool("isMoving", true);
+            }
+            
             state = MovementState.crouching;
             desiredMoveSpeed = crouchSpeed;
             transform.localScale = new Vector3(transform.localScale.x, crouchYScale, transform.localScale.z); // moves player down if they land into crouch
         }
         else if (isGrounded) // moving state
         {
+            animatorObj.SetBool("isMoving", true);
             state = MovementState.moving;
             desiredMoveSpeed = normalSpeed;
         }
         else // air movement state
         {
+            animatorObj.SetBool("isMoving", true);
             state = MovementState.air;
             desiredMoveSpeed = normalSpeed; // as of right now, dashing resets movement to normal speed
         }
