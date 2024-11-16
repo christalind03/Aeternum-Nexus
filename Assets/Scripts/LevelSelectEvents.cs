@@ -1,12 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 
 public class LevelSelectEvents : MonoBehaviour
 {
     private UIDocument main;
-    
+
+    public string Level1 = "Level1";
+    public string Level1Boss = "Boss1";
+
     private Button topR;
     private Button topL;
     private Button botR;
@@ -31,6 +35,7 @@ public class LevelSelectEvents : MonoBehaviour
     { 
         {
             Debug.Log("Enter scene: Level1");
+            SceneManager.LoadScene(Level1);
         }
     }
     private void OnTopLeft(ClickEvent click)
@@ -43,6 +48,7 @@ public class LevelSelectEvents : MonoBehaviour
     {
         {
             Debug.Log("Enter scene: Level1-Boss");
+            SceneManager.LoadScene(Level1Boss);
         }
     }
     private void OnBottomLeft(ClickEvent click)
