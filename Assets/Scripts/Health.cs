@@ -1,12 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Health : MonoBehaviour
 {
     [SerializeField] private float _maximumHealth;
     [SerializeField] private float _currentHealth; // Temporarily serialize the field to ensure health-related functionalities work properly
 
+    [SerializeField] private Image _HealthBarFIll;
     public float MaximumHealth { get { return _maximumHealth; } }
     public float CurrentHealth { get { return _currentHealth; } }
 
@@ -23,6 +25,7 @@ public class Health : MonoBehaviour
         {
             _currentHealth = _maximumHealth;
         }
+        UpdateHealthBar();
     }
 
     public void RemoveHealth(float healthPoints)
@@ -35,5 +38,14 @@ public class Health : MonoBehaviour
             Debug.Log($"{this.name} had 0HP remaining and died.");
             Destroy(gameObject);
         }
+        UpdateHealthBar();
     }
+
+    private void UpdateHealthBar()
+    {
+        float fillAmount = _currentHealth / _maximumHealth;
+        _HealthBarFIll.fillAmount = fillAmount;
+    }
+
+
 }
