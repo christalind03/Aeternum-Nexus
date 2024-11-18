@@ -39,6 +39,8 @@ public class Health : MonoBehaviour
         {
             Debug.Log($"{this.name} had 0HP remaining and died.");
             Destroy(gameObject);
+            SceneManager.LoadScene(sceneNumber);
+
         }
         UpdateHealthBar();
     }
@@ -55,6 +57,7 @@ public class Health : MonoBehaviour
         {
             KillPlayer();//fall out of world
         }
+        //Debug.Log(_currentHealth);
     }
 
     void KillPlayer()
