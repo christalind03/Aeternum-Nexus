@@ -2335,6 +2335,18 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 570975558}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &606442845 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6261952293732368579, guid: 471a4c0f66b5da54e80993d10cb8c940,
+    type: 3}
+  m_PrefabInstance: {fileID: 884868441}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &654969821
 GameObject:
   m_ObjectHideFlags: 0
@@ -3390,6 +3402,74 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 859368764}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1001 &884868441
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 204498528545116197, guid: 471a4c0f66b5da54e80993d10cb8c940,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.4702112
+      objectReference: {fileID: 0}
+    - target: {fileID: 204498528545116197, guid: 471a4c0f66b5da54e80993d10cb8c940,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1143.7897
+      objectReference: {fileID: 0}
+    - target: {fileID: 204498528545116197, guid: 471a4c0f66b5da54e80993d10cb8c940,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.8019455
+      objectReference: {fileID: 0}
+    - target: {fileID: 204498528545116197, guid: 471a4c0f66b5da54e80993d10cb8c940,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 204498528545116197, guid: 471a4c0f66b5da54e80993d10cb8c940,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 204498528545116197, guid: 471a4c0f66b5da54e80993d10cb8c940,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 204498528545116197, guid: 471a4c0f66b5da54e80993d10cb8c940,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 204498528545116197, guid: 471a4c0f66b5da54e80993d10cb8c940,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 204498528545116197, guid: 471a4c0f66b5da54e80993d10cb8c940,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 204498528545116197, guid: 471a4c0f66b5da54e80993d10cb8c940,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7077985595170300451, guid: 471a4c0f66b5da54e80993d10cb8c940,
+        type: 3}
+      propertyPath: m_Name
+      value: UI
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 471a4c0f66b5da54e80993d10cb8c940, type: 3}
 --- !u!1 &945273856 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -5568371526223589888, guid: a02eb311477d68a41bdb8331f9f6412d,
@@ -5959,7 +6039,7 @@ GameObject:
   - component: {fileID: 1623225826}
   - component: {fileID: 1623225827}
   - component: {fileID: 1623225828}
-  - component: {fileID: 1623225829}
+  - component: {fileID: 1623225830}
   m_Layer: 3
   m_Name: Player
   m_TagString: Player
@@ -6165,7 +6245,7 @@ MonoBehaviour:
   m_DefaultActionMap: Movement
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
---- !u!114 &1623225829
+--- !u!114 &1623225830
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -6174,11 +6254,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 1623225821}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ff47539fccd815344a9287b5cafd5ea8, type: 3}
+  m_Script: {fileID: 11500000, guid: a57d50f7d72fe734e9115009f996849a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxPlayerHealth: 100
-  sceneNumber: 1
+  _maximumHealth: 100
+  _currentHealth: 100
+  _HealthBarFIll: {fileID: 606442845}
+  sceneNumber: 4
 --- !u!1 &1658962069 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: fed89808e6c7d6f47945e6a0d16ea4d2,
@@ -16550,3 +16632,4 @@ SceneRoots:
   - {fileID: 1400484299}
   - {fileID: 1623225822}
   - {fileID: 2100603308}
+  - {fileID: 884868441}

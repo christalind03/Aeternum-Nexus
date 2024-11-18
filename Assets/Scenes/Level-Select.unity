@@ -184,6 +184,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9721a0fae2445324e8fff0e545178cfb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Level1: Level1
+  Level1Boss: Boss1
 --- !u!1 &1552693928
 GameObject:
   m_ObjectHideFlags: 0

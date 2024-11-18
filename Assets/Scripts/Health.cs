@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class Health : MonoBehaviour
@@ -9,9 +10,10 @@ public class Health : MonoBehaviour
     [SerializeField] private float _currentHealth; // Temporarily serialize the field to ensure health-related functionalities work properly
 
     [SerializeField] private Image _HealthBarFIll;
+    public int sceneNumber;
     public float MaximumHealth { get { return _maximumHealth; } }
     public float CurrentHealth { get { return _currentHealth; } }
-
+    
     private void Start()
     {
         _currentHealth = _maximumHealth;
@@ -47,5 +49,18 @@ public class Health : MonoBehaviour
         _HealthBarFIll.fillAmount = fillAmount;
     }
 
+    void Update()
+    {
+        if (transform.position.y < -50)
+        {
+            KillPlayer();//fall out of world
+        }
+    }
+
+    void KillPlayer()
+    {
+        Debug.Log("dead");
+        SceneManager.LoadScene(sceneNumber);
+    }
 
 }
