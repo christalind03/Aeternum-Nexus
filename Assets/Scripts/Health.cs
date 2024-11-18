@@ -9,8 +9,8 @@ public class Health : MonoBehaviour
     [SerializeField] private float _maximumHealth;
     [SerializeField] private float _currentHealth; // Temporarily serialize the field to ensure health-related functionalities work properly
 
-    [SerializeField] private Image _HealthBarFIll;
-    public int sceneNumber;
+    //[SerializeField] private Image _HealthBarFIll;
+    //public int sceneNumber;
     public float MaximumHealth { get { return _maximumHealth; } }
     public float CurrentHealth { get { return _currentHealth; } }
     
@@ -39,7 +39,7 @@ public class Health : MonoBehaviour
         {
             Debug.Log($"{this.name} had 0HP remaining and died.");
             Destroy(gameObject);
-            SceneManager.LoadScene(sceneNumber);
+            //SceneManager.LoadScene(sceneNumber);
 
         }
         UpdateHealthBar();
@@ -48,22 +48,21 @@ public class Health : MonoBehaviour
     private void UpdateHealthBar()
     {
         float fillAmount = _currentHealth / _maximumHealth;
-        _HealthBarFIll.fillAmount = fillAmount;
+        //_HealthBarFIll.fillAmount = fillAmount;
     }
 
     void Update()
     {
         if (transform.position.y < -50)
         {
-            KillPlayer();//fall out of world
+            //KillPlayer();//fall out of world
         }
         //Debug.Log(_currentHealth);
     }
 
-    void KillPlayer()
-    {
-        Debug.Log("dead");
-        SceneManager.LoadScene(sceneNumber);
-    }
-
+    //void KillPlayer()
+    //{
+    //    Debug.Log("dead");
+    //    SceneManager.LoadScene(sceneNumber);
+    //}
 }
