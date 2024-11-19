@@ -33,12 +33,6 @@ public class thing : MonoBehaviour
             {
                 playerBody.AddForce(Vector3.forward * fanForce, ForceMode.Force);
             }
-
-            //TEMP
-            if(playerHealth != null)
-            {
-                playerHealth.RemoveHealth(1);
-            }
         }
     }
 }
