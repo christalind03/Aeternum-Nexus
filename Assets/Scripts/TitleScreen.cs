@@ -1,11 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.ProBuilder.MeshOperations;
+using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 
 public class TitleScreen : MonoBehaviour
 {
     private UIDocument _uiDocument;
+
+    public string LevelSelect = "Level-Select";
 
     private Button _playButton;
     private Button _settingsButton;
@@ -27,6 +31,7 @@ public class TitleScreen : MonoBehaviour
     private void OnPlay(ClickEvent clickEvent)
     {
         Debug.Log("This should switch to the level select scene...");
+        SceneManager.LoadScene(LevelSelect);
     }
 
     private void OnSettings(ClickEvent clickEvent)
