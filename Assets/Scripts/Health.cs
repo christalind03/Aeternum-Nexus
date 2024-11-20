@@ -39,16 +39,23 @@ public class Health : MonoBehaviour
         {
             Debug.Log($"{this.name} had 0HP remaining and died.");
             Destroy(gameObject);
-            SceneManager.LoadScene(sceneToReload);
+            if (gameObject.CompareTag("Player"))
+            {
+                SceneManager.LoadScene(sceneToReload);
+            }
 
         }
+        
         UpdateHealthBar();
     }
 
     private void UpdateHealthBar()
     {
-        float fillAmount = _currentHealth / _maximumHealth;
-        _HealthBarFIll.fillAmount = fillAmount;
+        if (gameObject.CompareTag("Player"))
+        {
+            float fillAmount = _currentHealth / _maximumHealth;
+            _HealthBarFIll.fillAmount = fillAmount;
+        }
     }
 
     void Update()
@@ -63,7 +70,10 @@ public class Health : MonoBehaviour
     void KillPlayer()
     {
         Debug.Log("dead");
-        SceneManager.LoadScene(sceneToReload);
+        if (gameObject.CompareTag("Player"))
+        {
+            SceneManager.LoadScene(sceneToReload);
+        }
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
     }
