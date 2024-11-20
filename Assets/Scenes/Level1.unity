@@ -330,6 +330,11 @@ PrefabInstance:
       propertyPath: sceneToReload
       value: Level-Select
       objectReference: {fileID: 0}
+    - target: {fileID: 1708392752534542058, guid: d4848cfd6a9d0744e8eb92a42787fd8c,
+        type: 3}
+      propertyPath: _HealthBarFIll
+      value: 
+      objectReference: {fileID: 402772605}
     - target: {fileID: 1826382598008094823, guid: d4848cfd6a9d0744e8eb92a42787fd8c,
         type: 3}
       propertyPath: m_IsActive
@@ -400,6 +405,11 @@ PrefabInstance:
       propertyPath: sword
       value: 
       objectReference: {fileID: 801870489}
+    - target: {fileID: 6864212165320880147, guid: d4848cfd6a9d0744e8eb92a42787fd8c,
+        type: 3}
+      propertyPath: damage
+      value: 25
+      objectReference: {fileID: 0}
     - target: {fileID: 6864212165320880147, guid: d4848cfd6a9d0744e8eb92a42787fd8c,
         type: 3}
       propertyPath: isAttacking
@@ -487,7 +497,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8564736714bce124daa73166cbad1d71, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 5
+  damage: 15
   fireRate: 0.75
   range: 100
   allowButtonHold: 0
@@ -1588,6 +1598,18 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 2534964839176971238, guid: 12392f2d8081a0843b04a8e333e19fe6, type: 3}
+--- !u!114 &402772605 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5286482733370066478, guid: d4848cfd6a9d0744e8eb92a42787fd8c,
+    type: 3}
+  m_PrefabInstance: {fileID: 48508286}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &405457270
 GameObject:
   m_ObjectHideFlags: 0
@@ -7994,7 +8016,7 @@ GameObject:
   - component: {fileID: 2067400418}
   - component: {fileID: 2067400417}
   - component: {fileID: 2067400416}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cylinder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
