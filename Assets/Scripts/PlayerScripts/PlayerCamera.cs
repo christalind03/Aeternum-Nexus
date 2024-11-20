@@ -7,6 +7,7 @@ public class PlayerCamera : MonoBehaviour
     [Header("Camera")]
     public float sensitivityX;
     public float sensitivityY;
+    public float startingPlayerRotation;
 
     // public fieldOfView;
     
@@ -29,6 +30,8 @@ public class PlayerCamera : MonoBehaviour
         lookAction = playerControls.FindActionMap("Movement").FindAction("Look");
         lookAction.performed += context => lookInput = context.ReadValue<Vector2>();
         lookAction.canceled += context => lookInput = Vector2.zero;
+
+        horizontalRotation = startingPlayerRotation;
     }
 
     // Update is called once per frame

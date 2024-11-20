@@ -32,12 +32,9 @@ public class MeleeController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (swingAction.WasPressedThisFrame())
+        if (swingAction.WasPressedThisFrame() && canAttack)
         {
-            if (canAttack)
-            {
-                SwordAttack();
-            }
+            SwordAttack();
         }
     }
 
