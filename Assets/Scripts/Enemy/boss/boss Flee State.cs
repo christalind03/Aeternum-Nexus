@@ -53,14 +53,14 @@ public class BossFleeState : EnemyFleeState<boss.EEnemyState>
             Quaternion R180 = Context.Transform.rotation * Quaternion.Euler(0, 180, 0);
             Debug.Log("actually flee");
 
-            fanProjectile.CreateProjectile(_projectilePrefab, Context.Transform.position, R0,Context.AttackDamage, _projectileSpeed, _maxDistance, NR0);
+            fanProjectile.CreateProjectile(_projectilePrefab, Context.Transform.position, R0, Context.AttackDamage, _projectileSpeed, _maxDistance, NR0);
             fanProjectile.CreateProjectile(_projectilePrefab2, Context.Transform.position, R45, Context.AttackDamage, _projectileSpeed, _maxDistance, NR45);
             fanProjectile.CreateProjectile(_projectilePrefab3, Context.Transform.position, R90, Context.AttackDamage, _projectileSpeed, _maxDistance, NR90);
             fanProjectile.CreateProjectile(_projectilePrefab4, Context.Transform.position, R135, Context.AttackDamage, _projectileSpeed, _maxDistance,NR135);
             fanProjectile.CreateProjectile(_projectilePrefab5, Context.Transform.position, L45, Context.AttackDamage, _projectileSpeed, _maxDistance, NL45);
             fanProjectile.CreateProjectile(_projectilePrefab6, Context.Transform.position, L90, Context.AttackDamage, _projectileSpeed, _maxDistance, NL90);
             fanProjectile.CreateProjectile(_projectilePrefab7, Context.Transform.position, L135, Context.AttackDamage, _projectileSpeed, _maxDistance, NL135);
-            fanProjectile.CreateProjectile(_projectilePrefab, Context.Transform.position, R180, Context.AttackDamage, _projectileSpeed, _maxDistance, NR180);
+            fanProjectile.CreateProjectile(_projectilePrefab8, Context.Transform.position, R180, Context.AttackDamage, _projectileSpeed, _maxDistance, NR180);
 
 
             _attackTimer = 0f;

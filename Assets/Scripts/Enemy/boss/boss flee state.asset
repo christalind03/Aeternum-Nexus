@@ -16,5 +16,19 @@ MonoBehaviour:
   _fleeSpeed: 0
   _projectilePrefab: {fileID: 986780762480714680, guid: 9b162a8bd5b191247a85228f535105a1,
     type: 3}
+  _projectilePrefab2: {fileID: 986780762480714680, guid: 9b162a8bd5b191247a85228f535105a1,
+    type: 3}
+  _projectilePrefab3: {fileID: 986780762480714680, guid: 9b162a8bd5b191247a85228f535105a1,
+    type: 3}
+  _projectilePrefab4: {fileID: 986780762480714680, guid: 9b162a8bd5b191247a85228f535105a1,
+    type: 3}
+  _projectilePrefab5: {fileID: 986780762480714680, guid: 9b162a8bd5b191247a85228f535105a1,
+    type: 3}
+  _projectilePrefab6: {fileID: 986780762480714680, guid: 9b162a8bd5b191247a85228f535105a1,
+    type: 3}
+  _projectilePrefab7: {fileID: 986780762480714680, guid: 9b162a8bd5b191247a85228f535105a1,
+    type: 3}
+  _projectilePrefab8: {fileID: 986780762480714680, guid: 9b162a8bd5b191247a85228f535105a1,
+    type: 3}
   _projectileSpeed: 2
   _maxDistance: 10

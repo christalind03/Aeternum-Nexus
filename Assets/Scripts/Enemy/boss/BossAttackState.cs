@@ -4,7 +4,7 @@ using UnityEngine;
 public class BossAttackState : EnemyAttackState<boss.EEnemyState>
 {
     [SerializeField] private GameObject _projectilePrefab;
-    [SerializeField] private GameObject _projectilePrefab2;
+    
 
     [SerializeField] private float _projectileSpeed;
     [SerializeField] private float _maxDistance;
