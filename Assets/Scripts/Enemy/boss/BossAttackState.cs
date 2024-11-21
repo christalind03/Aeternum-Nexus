@@ -4,6 +4,8 @@ using UnityEngine;
 public class BossAttackState : EnemyAttackState<boss.EEnemyState>
 {
     [SerializeField] private GameObject _projectilePrefab;
+    [SerializeField] private GameObject _projectilePrefab2;
+
     [SerializeField] private float _projectileSpeed;
     [SerializeField] private float _maxDistance;
     
@@ -21,7 +23,7 @@ public class BossAttackState : EnemyAttackState<boss.EEnemyState>
     {
         _attackTimer += Time.deltaTime;
 
-        if (Context.AttackCooldown <= _attackTimer)
+        if (Context.AttackCooldown <= _attackTimer)//if able to attack
         {
             Quaternion R45 = Context.Transform.rotation * Quaternion.Euler(0, 45, 0);
             Quaternion L45 = Context.Transform.rotation * Quaternion.Euler(0, -45, 0);

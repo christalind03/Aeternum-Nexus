@@ -37,13 +37,7 @@ public class Health : MonoBehaviour
         // Zero means that the current object has no more health.
         if (_currentHealth <= 0)
         {
-            Debug.Log($"{this.name} had 0HP remaining and died.");
-            Destroy(gameObject);
-            if (gameObject.CompareTag("Player"))
-            {
-                SceneManager.LoadScene(sceneToReload);
-            }
-
+            KillPlayer();
         }
         
         UpdateHealthBar();
@@ -75,15 +69,16 @@ public class Health : MonoBehaviour
     void KillPlayer()
     {
         Debug.Log("dead");
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
         if (gameObject.CompareTag("Player"))
         {
+            
             SceneManager.LoadScene(sceneToReload);
         }
         if (gameObject.name=="boss1")
         {
             SceneManager.LoadScene(sceneToReload);
         }
-        Cursor.lockState = CursorLockMode.None;
-        Cursor.visible = true;
     }
 }

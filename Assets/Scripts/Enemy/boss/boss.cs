@@ -16,8 +16,9 @@ public class boss : Enemy<boss.EEnemyState>
 
     private void FixedUpdate()
     {
-        if (0 < _fieldOfView.DetectedObjects.Count)
+        if (0 < _fieldOfView.DetectedObjects.Count)//if there are objects in view
         {
+            Debug.Log("player detected");
             // Since this is a single-player game and we are only detecting for players, it's safe to assume that the 0th index will always be our player.
             Transform playerTransform = _fieldOfView.DetectedObjects[0].transform;
 
@@ -26,11 +27,18 @@ public class boss : Enemy<boss.EEnemyState>
 
             if (Physics.CheckSphere(transform.position, _fleeRange, _playerMask))
             {
+                Debug.Log("Flee State");
                 TransitionToState(EEnemyState.Flee);
             }
             else
             {
+                Debug.Log("Attack1");
                 TransitionToState(EEnemyState.Attack);
+                Debug.Log("Attack1Done");
+                Debug.Log("Attack2");
+                //TransitionToState(EEnemyState.Attack2);
+                Debug.Log("Attack2Done");
+
             }
         }
         else
