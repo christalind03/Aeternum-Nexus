@@ -29,6 +29,8 @@ public class Enemy<EState> : StateManager<EState> where EState : Enum
         _initialPosition = transform.position;
         _initialRotation = transform.rotation;
 
+        //Debug.Log($"{gameObject.name} initialized at {_initialPosition}");
+
         _fieldOfView = GetComponent<FieldOfView>();
         _navMeshAgent = GetComponent<NavMeshAgent>();
 
@@ -44,9 +46,11 @@ public class Enemy<EState> : StateManager<EState> where EState : Enum
         {
             EState stateEntryKey = stateEntry.Key;
             EnemyState<EState> stateEntryValue = (EnemyState<EState>)stateEntry.Value;
+            EnemyState<EState> personalInstance = (EnemyState<EState>)ScriptableObject.CreateInstance(stateEntryValue.GetType());
 
-            stateEntryValue.Initialize(_context, stateEntryKey);
-            States.Add(stateEntryKey, stateEntryValue);
+            personalInstance.Set(stateEntryValue);
+            personalInstance.Initialize(_context, stateEntryKey);
+            States.Add(stateEntryKey, personalInstance);
         }
     }
 

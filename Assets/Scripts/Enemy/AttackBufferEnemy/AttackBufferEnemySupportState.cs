@@ -5,10 +5,20 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Support State", menuName = "BaseState/AttackBufferEnemy/SupportState")]
 public class AttackBufferEnemySupportState : EnemyState<AttackBufferEnemy.EEnemyState>
 {
-    [SerializeField] private float _supportDuration;
-    [SerializeField] private float _supportPercentage;
-    [SerializeField] private float _supportRadius;
-    
+    public float SupportDuration;
+    public float SupportPercentage;
+    public float SupportRadius;
+
+    public override void Set(EnemyState<AttackBufferEnemy.EEnemyState> otherInstance)
+    {
+        if (otherInstance is AttackBufferEnemySupportState otherState)
+        {
+            SupportDuration = otherState.SupportDuration;
+            SupportPercentage = otherState.SupportPercentage;
+            SupportRadius = otherState.SupportRadius;
+        }
+    }
+
     public void Initalize(EnemyContext context, AttackBufferEnemy.EEnemyState estate)
     {
         Context = context;
@@ -21,13 +31,13 @@ public class AttackBufferEnemySupportState : EnemyState<AttackBufferEnemy.EEnemy
         supportDevice.transform.position = Context.Transform.position;
 
         AttackBufferDevice attackBufferDevice = supportDevice.AddComponent<AttackBufferDevice>();
-        attackBufferDevice.Duration = _supportDuration;
-        attackBufferDevice.Percentage = _supportPercentage;
+        attackBufferDevice.Duration = SupportDuration;
+        attackBufferDevice.Percentage = SupportPercentage;
 
         // In order for the support device to work correctly, we need a collider and rigidbody for enemies to register triggers.
         SphereCollider supportCollider = supportDevice.AddComponent<SphereCollider>();
         supportCollider.isTrigger = true;
-        supportCollider.radius = _supportRadius;
+        supportCollider.radius = SupportRadius;
 
         Rigidbody supportRigidbody = supportDevice.AddComponent<Rigidbody>();
         supportRigidbody.isKinematic = true;

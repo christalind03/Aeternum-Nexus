@@ -4,13 +4,21 @@ using UnityEngine;
 [System.Serializable]
 public class EnemyIdleState<EState> : EnemyState<EState> where EState : Enum
 {
-    [SerializeField] private float _offsetAngle;
-    [SerializeField] private float _rotationSpeed;
+    public float OffsetAngle;
+    public float RotationSpeed;
 
     private Quaternion _targetRotation;
     private bool _hasTargetRotation; 
     private bool _isReset;
 
+    public override void Set(EnemyState<EState> otherInstance)
+    {
+        if (otherInstance is EnemyIdleState<EState> otherState)
+        {
+            OffsetAngle = otherState.OffsetAngle;
+            RotationSpeed = otherState.RotationSpeed;
+        }
+    }
     public void Initalize(EnemyContext context, EState estate)
     {
         Context = context;
@@ -44,7 +52,7 @@ public class EnemyIdleState<EState> : EnemyState<EState> where EState : Enum
             if (Vector3.Distance(Context.InitialPosition, Context.Transform.position) < 0.1f)
             {
                 // Rotate the enemy back to its original rotation
-                Context.Transform.rotation = Quaternion.Slerp(Context.Transform.rotation, Context.InitialRotation, _rotationSpeed * Time.deltaTime);
+                Context.Transform.rotation = Quaternion.Slerp(Context.Transform.rotation, Context.InitialRotation, RotationSpeed * Time.deltaTime);
             }
 
             // We would set this to be Context.InitialRotation == Context.CurrentTransform.rotation, but due to floating point values we have to calculate its distance instead.
@@ -58,7 +66,7 @@ public class EnemyIdleState<EState> : EnemyState<EState> where EState : Enum
             if (_hasTargetRotation)
             {
                 // Rotate the enemy back to its original rotation
-                Context.Transform.rotation = Quaternion.Slerp(Context.Transform.rotation, _targetRotation, _rotationSpeed * Time.deltaTime);
+                Context.Transform.rotation = Quaternion.Slerp(Context.Transform.rotation, _targetRotation, RotationSpeed * Time.deltaTime);
 
                 // We would set this to be _targetRotation == Context.CurrentTransform.rotation, but due to floating point values we have to calculate its distance instead.
                 if (Quaternion.Angle(_targetRotation, Context.Transform.rotation) < 0.1f)
@@ -70,7 +78,7 @@ public class EnemyIdleState<EState> : EnemyState<EState> where EState : Enum
             {
                 Vector3 eulerAngle = Context.InitialRotation.eulerAngles;
 
-                float targetAngle = UnityEngine.Random.Range(eulerAngle.y - _offsetAngle, eulerAngle.y + _offsetAngle);
+                float targetAngle = UnityEngine.Random.Range(eulerAngle.y - OffsetAngle, eulerAngle.y + OffsetAngle);
                 _targetRotation = Quaternion.Euler(0f, targetAngle, 0f);
 
                 _hasTargetRotation = true;

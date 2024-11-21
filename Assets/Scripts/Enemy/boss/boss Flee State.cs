@@ -5,14 +5,21 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Flee State", menuName = "BaseState/boss/FleeState")]
 public class BossFleeState : EnemyFleeState<boss.EEnemyState> 
 {
-    [SerializeField] private GameObject _projectilePrefab;
-
-
-    [SerializeField] private float _projectileSpeed;
-    [SerializeField] private float _maxDistance;
-
+    public GameObject ProjectilePrefab;
+    public float ProjectileSpeed;
+    public float MaxDistance;
 
     private float _attackTimer = 0f;
+
+    public override void Set(EnemyState<boss.EEnemyState> otherInstance)
+    {
+        if (otherInstance is BossFleeState otherState)
+        {
+            ProjectilePrefab = otherState.ProjectilePrefab;
+            ProjectileSpeed = otherState.ProjectileSpeed;
+            MaxDistance = otherState.MaxDistance;
+        }
+    }
 
     public override void EnterState()
     {
@@ -27,7 +34,7 @@ public class BossFleeState : EnemyFleeState<boss.EEnemyState>
 
         if (Context.AttackCooldown <= _attackTimer)//if able to attack
         {
-            SphereProjectile.CreateProjectile(_projectilePrefab, Context.Transform.position, Context.Transform.rotation, Context.AttackDamage, _projectileSpeed, _maxDistance);
+            SphereProjectile.CreateProjectile(ProjectilePrefab, Context.Transform.position, Context.Transform.rotation, Context.AttackDamage, ProjectileSpeed, MaxDistance);
             
 
             _attackTimer = 0f;

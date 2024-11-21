@@ -3,14 +3,21 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Attack State", menuName = "BaseState/boss/AttackState")]
 public class BossAttackState : EnemyAttackState<boss.EEnemyState>
 {
-    [SerializeField] private GameObject _projectilePrefab;
+    public GameObject ProjectilePrefab;
+    public float ProjectileSpeed;
+    public float MaxDistance;
     
-
-    [SerializeField] private float _projectileSpeed;
-    [SerializeField] private float _maxDistance;
-    
-
     private float _attackTimer = 0f;
+
+    public override void Set(EnemyState<boss.EEnemyState> otherInstance)
+    {
+        if (otherInstance is BossAttackState otherState)
+        {
+            ProjectilePrefab = otherState.ProjectilePrefab;
+            ProjectileSpeed = otherState.ProjectileSpeed;
+            MaxDistance = otherState.MaxDistance;
+        }
+    }
 
     public override void EnterState()
     {
@@ -34,14 +41,14 @@ public class BossAttackState : EnemyAttackState<boss.EEnemyState>
             Quaternion R180 = Context.Transform.rotation * Quaternion.Euler(0, 180, 0);
             
 
-            Projectile.CreateProjectile(_projectilePrefab, Context.Transform.position, Context.Transform.rotation, Context.AttackDamage, _projectileSpeed, _maxDistance);
-            Projectile.CreateProjectile(_projectilePrefab, Context.Transform.position, R45, Context.AttackDamage, _projectileSpeed, _maxDistance);
-            Projectile.CreateProjectile(_projectilePrefab, Context.Transform.position, R90, Context.AttackDamage, _projectileSpeed, _maxDistance);
-            Projectile.CreateProjectile(_projectilePrefab, Context.Transform.position, R135, Context.AttackDamage, _projectileSpeed, _maxDistance);
-            Projectile.CreateProjectile(_projectilePrefab, Context.Transform.position, L45, Context.AttackDamage, _projectileSpeed, _maxDistance);
-            Projectile.CreateProjectile(_projectilePrefab, Context.Transform.position, L90, Context.AttackDamage, _projectileSpeed, _maxDistance);
-            Projectile.CreateProjectile(_projectilePrefab, Context.Transform.position, L135, Context.AttackDamage, _projectileSpeed, _maxDistance);
-            Projectile.CreateProjectile(_projectilePrefab, Context.Transform.position, R180, Context.AttackDamage, _projectileSpeed, _maxDistance);
+            Projectile.CreateProjectile(ProjectilePrefab, Context.Transform.position, Context.Transform.rotation, Context.AttackDamage, ProjectileSpeed, MaxDistance);
+            Projectile.CreateProjectile(ProjectilePrefab, Context.Transform.position, R45, Context.AttackDamage, ProjectileSpeed, MaxDistance);
+            Projectile.CreateProjectile(ProjectilePrefab, Context.Transform.position, R90, Context.AttackDamage, ProjectileSpeed, MaxDistance);
+            Projectile.CreateProjectile(ProjectilePrefab, Context.Transform.position, R135, Context.AttackDamage, ProjectileSpeed, MaxDistance);
+            Projectile.CreateProjectile(ProjectilePrefab, Context.Transform.position, L45, Context.AttackDamage, ProjectileSpeed, MaxDistance);
+            Projectile.CreateProjectile(ProjectilePrefab, Context.Transform.position, L90, Context.AttackDamage, ProjectileSpeed, MaxDistance);
+            Projectile.CreateProjectile(ProjectilePrefab, Context.Transform.position, L135, Context.AttackDamage, ProjectileSpeed, MaxDistance);
+            Projectile.CreateProjectile(ProjectilePrefab, Context.Transform.position, R180, Context.AttackDamage, ProjectileSpeed, MaxDistance);
 
 
             _attackTimer = 0f;

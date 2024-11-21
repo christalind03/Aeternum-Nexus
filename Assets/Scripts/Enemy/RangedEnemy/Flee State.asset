@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1594e8ab45fb0474dbdec545bd1e2321, type: 3}
   m_Name: Flee State
   m_EditorClassIdentifier: 
-  _fleeDistance: 7
-  _fleeSpeed: 15
+  FleeDistance: 7
+  FleeSpeed: 15

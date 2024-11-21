@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9e7b211cc9760041bf8cfe366aecd96, type: 3}
   m_Name: Idle State
   m_EditorClassIdentifier: 
-  _offsetAngle: 45
-  _rotationSpeed: 1.5
+  OffsetAngle: 45
+  RotationSpeed: 1.5
