@@ -56,6 +56,11 @@ public class Health : MonoBehaviour
             float fillAmount = _currentHealth / _maximumHealth;
             _HealthBarFIll.fillAmount = fillAmount;
         }
+        if (gameObject.name == "boss1")
+        {
+            float fillAmount = _currentHealth / _maximumHealth;
+            _HealthBarFIll.fillAmount = fillAmount;
+        }
     }
 
     void Update()
@@ -71,6 +76,10 @@ public class Health : MonoBehaviour
     {
         Debug.Log("dead");
         if (gameObject.CompareTag("Player"))
+        {
+            SceneManager.LoadScene(sceneToReload);
+        }
+        if (gameObject.name=="boss1")
         {
             SceneManager.LoadScene(sceneToReload);
         }
