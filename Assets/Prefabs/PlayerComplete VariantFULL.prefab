@@ -419,7 +419,7 @@ PrefabInstance:
     - target: {fileID: 1559417758913318688, guid: d4848cfd6a9d0744e8eb92a42787fd8c,
         type: 3}
       propertyPath: m_Name
-      value: PlayerComplete Variant
+      value: PlayerComplete VariantFULL
       objectReference: {fileID: 0}
     - target: {fileID: 1708392752534542058, guid: d4848cfd6a9d0744e8eb92a42787fd8c,
         type: 3}
@@ -435,6 +435,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2859631313256690097, guid: d4848cfd6a9d0744e8eb92a42787fd8c,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3089350448956560920, guid: d4848cfd6a9d0744e8eb92a42787fd8c,
         type: 3}
@@ -498,6 +503,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6864212165320880147, guid: d4848cfd6a9d0744e8eb92a42787fd8c,
         type: 3}
+      propertyPath: cam
+      value: 
+      objectReference: {fileID: 7358872592214968574}
+    - target: {fileID: 6864212165320880147, guid: d4848cfd6a9d0744e8eb92a42787fd8c,
+        type: 3}
       propertyPath: sword
       value: 
       objectReference: {fileID: 7971588058286032947}
@@ -510,6 +520,11 @@ PrefabInstance:
         type: 3}
       propertyPath: isAttacking
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6864212165320880147, guid: d4848cfd6a9d0744e8eb92a42787fd8c,
+        type: 3}
+      propertyPath: whatIsEnemy.m_Bits
+      value: 128
       objectReference: {fileID: 0}
     - target: {fileID: 8275189302189440956, guid: d4848cfd6a9d0744e8eb92a42787fd8c,
         type: 3}
@@ -613,7 +628,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7971588058286032947}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b211b355cabe3cc4f86ee86e1e9d7de2, type: 3}
   m_Name: 
