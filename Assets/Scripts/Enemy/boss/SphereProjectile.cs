@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class fanProjectile : MonoBehaviour
+public class SphereProjectile : MonoBehaviour
 {
     [SerializeField] private float _attackDamage;
     [SerializeField] private float _projectileSpeed;
@@ -15,15 +15,13 @@ public class fanProjectile : MonoBehaviour
         _initialPosition = transform.position;
     }
 
-    public static fanProjectile CreateProjectile(GameObject objPrefab, Vector3 objPosition, Quaternion objRotation, float attackDamage, float projectileSpeed, float maxDistance, string name)
+    public static SphereProjectile CreateProjectile(GameObject objPrefab, Vector3 objPosition, Quaternion objRotation, float attackDamage, float projectileSpeed, float maxDistance)
     {
         GameObject projectileObj = Instantiate(objPrefab, objPosition, objRotation);
 
-        projectileObj.name = name;
-
-        if (!projectileObj.TryGetComponent<fanProjectile>(out fanProjectile projectileComponent))
+        if (!projectileObj.TryGetComponent<SphereProjectile>(out SphereProjectile projectileComponent))
         {
-            projectileComponent = projectileObj.AddComponent<fanProjectile>();
+            projectileComponent = projectileObj.AddComponent<SphereProjectile>();
         }
 
         projectileComponent._attackDamage = attackDamage;
@@ -47,10 +45,11 @@ public class fanProjectile : MonoBehaviour
     {
         if (otherCollider.gameObject.CompareTag("Player"))
         {
-            
+            otherCollider.gameObject.GetComponent<Health>().RemoveHealth(_attackDamage);
         }
 
         Destroy(gameObject);
     }
     */
 }
+

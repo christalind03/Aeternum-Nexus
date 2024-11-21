@@ -20,18 +20,16 @@ public class boss : Enemy<boss.EEnemyState>
         {
             Debug.Log("player detected");
             // Since this is a single-player game and we are only detecting for players, it's safe to assume that the 0th index will always be our player.
-            //Transform playerTransform = _fieldOfView.DetectedObjects[0].transform;
+            Transform playerTransform = _fieldOfView.DetectedObjects[0].transform;
 
             // This is separated from state logic because we always want to look at the player if they're within the enemy's field of view.
-            //transform.LookAt(playerTransform.position);
-            Vector3 fixedDirection = new Vector3(0, 0, 0);
-            transform.LookAt(fixedDirection);
+            transform.LookAt(playerTransform.position);
+            
 
             if (Physics.CheckSphere(transform.position, _fleeRange, _playerMask))
             {
                 Debug.Log("Flee State");
 
-                transform.LookAt(fixedDirection);
                 TransitionToState(EEnemyState.Flee);
 
             }
