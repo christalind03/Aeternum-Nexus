@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f8fa9a1a0fbc6140b2f6f3858265e42, type: 3}
   m_Name: boss attack state
   m_EditorClassIdentifier: 
-  _projectilePrefab: {fileID: 665870439883776629, guid: ebad980416f3f5f40a1c77415b7d11f2,
+  ProjectilePrefab: {fileID: 665870439883776629, guid: ebad980416f3f5f40a1c77415b7d11f2,
     type: 3}
-  _projectileSpeed: 3
-  _maxDistance: 20
+  ProjectileSpeed: 3
+  MaxDistance: 20

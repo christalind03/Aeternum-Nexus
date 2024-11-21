@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ae81048cfc8ab74281cf043c6ee3480, type: 3}
   m_Name: boss flee state
   m_EditorClassIdentifier: 
-  _fleeDistance: 10
-  _fleeSpeed: 0
-  _projectilePrefab: {fileID: 7356523843061460507, guid: a561b879cdb0f2e4bad66e9eb7529c12,
+  FleeDistance: 0
+  FleeSpeed: 0
+  ProjectilePrefab: {fileID: 7356523843061460507, guid: a561b879cdb0f2e4bad66e9eb7529c12,
     type: 3}
-  _projectileSpeed: 0.05
-  _maxDistance: 0.1
+  ProjectileSpeed: 0.05
+  MaxDistance: 0.1
