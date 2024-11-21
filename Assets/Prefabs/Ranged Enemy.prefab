@@ -16,9 +16,9 @@ GameObject:
   - component: {fileID: 5749091104479764861}
   - component: {fileID: 3924246063728791735}
   - component: {fileID: 6231103123550995709}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: Ranged Enemy
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -199,6 +199,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _maximumHealth: 100
-  _currentHealth: 0
+  _currentHealth: 100
   _HealthBarFIll: {fileID: 0}
   sceneToReload: 

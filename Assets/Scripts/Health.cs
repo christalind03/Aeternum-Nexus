@@ -69,16 +69,17 @@ public class Health : MonoBehaviour
     void KillPlayer()
     {
         Debug.Log("dead");
-        Cursor.lockState = CursorLockMode.None;
-        Cursor.visible = true;
+        
         if (gameObject.CompareTag("Player"))
         {
-            
             SceneManager.LoadScene(sceneToReload);
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
         }
         if (gameObject.name=="boss1")
         {
             SceneManager.LoadScene(sceneToReload);
         }
+        Destroy(gameObject);
     }
 }

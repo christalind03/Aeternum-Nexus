@@ -16,9 +16,9 @@ GameObject:
   - component: {fileID: 2974728476093571260}
   - component: {fileID: 7806816612488502650}
   - component: {fileID: 3315564253525220195}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: Melee Enemy
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -198,6 +198,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _maximumHealth: 100
-  _currentHealth: 0
+  _currentHealth: 100
   _HealthBarFIll: {fileID: 0}
   sceneToReload: 

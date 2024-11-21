@@ -355,6 +355,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Melee Enemy (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 3315564253525220195, guid: 82afe40fd5c00634fa2f7c9871f2e1ca,
+        type: 3}
+      propertyPath: _currentHealth
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 5315262946001548327, guid: 82afe40fd5c00634fa2f7c9871f2e1ca,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -8153,6 +8158,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Ranged Enemy (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 6231103123550995709, guid: 50e519a99b84429449c9d01a5af6e2fa,
+        type: 3}
+      propertyPath: _currentHealth
+      value: 100
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -8874,6 +8884,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Melee Enemy (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3315564253525220195, guid: 82afe40fd5c00634fa2f7c9871f2e1ca,
+        type: 3}
+      propertyPath: _currentHealth
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 5315262946001548327, guid: 82afe40fd5c00634fa2f7c9871f2e1ca,
         type: 3}
@@ -9603,6 +9618,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Melee Enemy (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3315564253525220195, guid: 82afe40fd5c00634fa2f7c9871f2e1ca,
+        type: 3}
+      propertyPath: _currentHealth
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 5315262946001548327, guid: 82afe40fd5c00634fa2f7c9871f2e1ca,
         type: 3}
@@ -10734,6 +10754,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Ranged Enemy
       objectReference: {fileID: 0}
+    - target: {fileID: 6231103123550995709, guid: 50e519a99b84429449c9d01a5af6e2fa,
+        type: 3}
+      propertyPath: _currentHealth
+      value: 100
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -10789,6 +10814,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_TagString
       value: Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 3315564253525220195, guid: 82afe40fd5c00634fa2f7c9871f2e1ca,
+        type: 3}
+      propertyPath: _currentHealth
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 5315262946001548327, guid: 82afe40fd5c00634fa2f7c9871f2e1ca,
         type: 3}
@@ -11032,6 +11062,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Ranged Enemy (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 6231103123550995709, guid: 50e519a99b84429449c9d01a5af6e2fa,
+        type: 3}
+      propertyPath: _currentHealth
+      value: 100
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -11099,6 +11134,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Ranged Enemy (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6231103123550995709, guid: 50e519a99b84429449c9d01a5af6e2fa,
+        type: 3}
+      propertyPath: _currentHealth
+      value: 100
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -11212,6 +11252,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Melee Enemy (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3315564253525220195, guid: 82afe40fd5c00634fa2f7c9871f2e1ca,
+        type: 3}
+      propertyPath: _currentHealth
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 5315262946001548327, guid: 82afe40fd5c00634fa2f7c9871f2e1ca,
         type: 3}
@@ -12185,6 +12230,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Melee Enemy (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3315564253525220195, guid: 82afe40fd5c00634fa2f7c9871f2e1ca,
+        type: 3}
+      propertyPath: _currentHealth
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 5315262946001548327, guid: 82afe40fd5c00634fa2f7c9871f2e1ca,
         type: 3}
