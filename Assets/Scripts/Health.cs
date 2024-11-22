@@ -87,15 +87,11 @@ public class Health : MonoBehaviour
     {
         Debug.Log("dead");
         
-        if (gameObject.CompareTag("Player"))
+        if (gameObject.CompareTag("Player")|| gameObject.name == "boss1" || gameObject.name == "Exit")
         {
             SceneManager.LoadScene(sceneToReload);
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.None;
-        }
-        if (gameObject.name=="boss1")
-        {
-            SceneManager.LoadScene(sceneToReload);
         }
         Destroy(gameObject);
     }
