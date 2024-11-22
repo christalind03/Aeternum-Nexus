@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f8fa9a1a0fbc6140b2f6f3858265e42, type: 3}
+  m_Name: boss attack state
+  m_EditorClassIdentifier: 
+  ProjectilePrefab: {fileID: 665870439883776629, guid: ebad980416f3f5f40a1c77415b7d11f2,
+    type: 3}
+  ProjectileSpeed: 3
+  MaxDistance: 20

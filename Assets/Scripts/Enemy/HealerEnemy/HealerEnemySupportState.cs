@@ -5,11 +5,20 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Support State", menuName = "BaseState/HealerEnemy/SupportState")]
 public class HealerSupportState : EnemyState<HealerEnemy.EEnemyState>
 {
-    [SerializeField] private float _supportRadius;
-    [SerializeField] private LayerMask _supportLayers;
+    public float SupportRadius;
+    public LayerMask SupportLayers;
 
     private Collider[] _detectedColliders = new Collider[15];
-    
+
+    public override void Set(EnemyState<HealerEnemy.EEnemyState> otherInstance)
+    {
+        if (otherInstance is HealerSupportState otherState)
+        {
+            SupportRadius = otherState.SupportRadius;
+            SupportLayers = otherState.SupportLayers;
+        }
+    }
+
     public void Initalize(EnemyContext context, HealerEnemy.EEnemyState estate)
     {
         Context = context;
@@ -18,7 +27,7 @@ public class HealerSupportState : EnemyState<HealerEnemy.EEnemyState>
 
     public override void EnterState()
     {
-        int _colliderCount = Physics.OverlapSphereNonAlloc(Context.Transform.position, _supportRadius, _detectedColliders, _supportLayers, QueryTriggerInteraction.Collide);
+        int _colliderCount = Physics.OverlapSphereNonAlloc(Context.Transform.position, SupportRadius, _detectedColliders, SupportLayers, QueryTriggerInteraction.Collide);
 
         for (int i = 0; i < _colliderCount; ++i)
         {

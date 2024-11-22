@@ -10,13 +10,23 @@ public class Health : MonoBehaviour
     [SerializeField] private float _currentHealth; // Temporarily serialize the field to ensure health-related functionalities work properly
 
     [SerializeField] private Image _HealthBarFIll;
-    public int sceneNumber;
+    [SerializeField] private Image _HealthBarBack;
+
+    public string sceneToReload;
     public float MaximumHealth { get { return _maximumHealth; } }
     public float CurrentHealth { get { return _currentHealth; } }
     
     private void Start()
     {
         _currentHealth = _maximumHealth;
+        if(gameObject.name == "boss1")
+        {
+            _HealthBarFIll.color = new Color32(1, 1, 1, 0);
+            _HealthBarBack.color = new Color32(1, 1, 1, 0);
+
+        }
+
+
     }
 
     public void AddHealth(float healthPoints)
@@ -33,22 +43,35 @@ public class Health : MonoBehaviour
     public void RemoveHealth(float healthPoints)
     {
         _currentHealth -= healthPoints;
+        if (gameObject.name == "boss1")
+        {
+            float fillAmount = _currentHealth / _maximumHealth;
+            _HealthBarFIll.color = new Color32(254,0,0,255);
+            _HealthBarBack.color = new Color32(118, 0, 7, 255);
+
+        }
 
         // Zero means that the current object has no more health.
         if (_currentHealth <= 0)
         {
-            Debug.Log($"{this.name} had 0HP remaining and died.");
-            Destroy(gameObject);
-            SceneManager.LoadScene(sceneNumber);
-
+            KillPlayer();
         }
+        
         UpdateHealthBar();
     }
 
     private void UpdateHealthBar()
     {
-        float fillAmount = _currentHealth / _maximumHealth;
-        _HealthBarFIll.fillAmount = fillAmount;
+        if (gameObject.CompareTag("Player"))
+        {
+            float fillAmount = _currentHealth / _maximumHealth;
+            _HealthBarFIll.fillAmount = fillAmount;
+        }
+        if (gameObject.name == "boss1")
+        {
+            float fillAmount = _currentHealth / _maximumHealth;
+            _HealthBarFIll.fillAmount = fillAmount;
+        }
     }
 
     void Update()
@@ -63,6 +86,13 @@ public class Health : MonoBehaviour
     void KillPlayer()
     {
         Debug.Log("dead");
-        SceneManager.LoadScene(sceneNumber);
+        
+        if (gameObject.CompareTag("Player")|| gameObject.name == "boss1" || gameObject.name == "Exit")
+        {
+            SceneManager.LoadScene(sceneToReload);
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
+        }
+        Destroy(gameObject);
     }
 }

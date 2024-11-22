@@ -7,7 +7,7 @@ public class GunController : MonoBehaviour
 {
     [Header("Stats")]
     public float damage;
-    public float fireRate, timeBetweenShots, range;
+    public float fireRate, range;
     public bool allowButtonHold;
 
     public bool isShooting, isReadyToFire;
@@ -49,18 +49,19 @@ public class GunController : MonoBehaviour
     void FireGun()
     {
         isReadyToFire = false;
-
         if (Physics.Raycast(cam.transform.position, cam.transform.forward, out raycastHit, range, whatIsEnemy))
         {
             Debug.Log(raycastHit.collider.name);
             if (raycastHit.collider.CompareTag("Enemy"))
             {
-                // raycastHit.collider.GetComponent<ShootingAI>().TakeDamage(damage);
+                Debug.Log("Bullet Hit!");
+                Invoke("ResetShot", fireRate); // calling the function below completely exits this FireGun function and i don't know why
+                raycastHit.collider.GetComponent<Health>().RemoveHealth(damage);
             }
         }
 
         // Instantiate(muzzleFlash, attackPoint.position, Quaternion.identity);
-        Invoke("ResetShot", timeBetweenShots);
+        Invoke("ResetShot", fireRate);
     }
     void ResetShot()
     {

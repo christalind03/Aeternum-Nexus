@@ -6,10 +6,19 @@ using UnityEngine.AI;
 
 public class EnemyFleeState<EState> : EnemyState<EState> where EState : Enum
 {
-    [SerializeField] private float _fleeDistance;
-    [SerializeField] private float _fleeSpeed;
+    public float FleeDistance;
+    public float FleeSpeed;
 
     private float _initialSpeed;
+
+    public override void Set(EnemyState<EState> otherInstance)
+    {
+        if (otherInstance is EnemyFleeState<EState> otherState)
+        {
+            FleeDistance = otherState.FleeDistance;
+            FleeSpeed = otherState.FleeSpeed;
+        }
+    }
 
     public void Initalize(EnemyContext context, EState estate)
     {
@@ -20,7 +29,7 @@ public class EnemyFleeState<EState> : EnemyState<EState> where EState : Enum
     public override void EnterState()
     {
         _initialSpeed = Context.NavMeshAgent.acceleration;
-        Context.NavMeshAgent.acceleration = _fleeSpeed;
+        Context.NavMeshAgent.acceleration = FleeSpeed;
     }
 
     public override void ExitState()
@@ -38,7 +47,7 @@ public class EnemyFleeState<EState> : EnemyState<EState> where EState : Enum
         Transform playerTransform = Context.FieldOfView.DetectedObjects[0].transform;
 
         Vector3 targetDirection = (Context.Transform.position - playerTransform.position).normalized;
-        Vector3 targetPosition = Context.Transform.position + targetDirection * _fleeDistance;
+        Vector3 targetPosition = Context.Transform.position + targetDirection * FleeDistance;
 
         Context.NavMeshAgent.SetDestination(targetPosition);
     }

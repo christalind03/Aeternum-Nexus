@@ -47,8 +47,8 @@ public class LevelSelectEvents : MonoBehaviour
     private void OnBottomRight(ClickEvent click)
     {
         {
-            Debug.Log("Enter scene: Level1-Boss");
-            SceneManager.LoadScene(Level1Boss);
+            Debug.Log("Enter scene:LOCKEDLevel1-Boss");
+            
         }
     }
     private void OnBottomLeft(ClickEvent click)

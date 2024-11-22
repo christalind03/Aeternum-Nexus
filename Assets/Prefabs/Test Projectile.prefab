@@ -120,4 +120,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _attackDamage: 0
   _projectileSpeed: 3
-  _maxDistance: 0
+  _maxDistance: 30

@@ -7,8 +7,10 @@ using UnityEngine.InputSystem;
 public class MeleeController : MonoBehaviour
 {
     [Header("References")]
+    public Camera cam;
     public GameObject sword;
     public GameObject player;
+    public LayerMask whatIsEnemy;
     public InputActionAsset playerControls;
     InputAction swingAction;
 
@@ -17,9 +19,12 @@ public class MeleeController : MonoBehaviour
     public bool isAttacking = false;
 
     [Header("Modifiers")]
+    public float attackRange = 1.5f;
     public float attackCooldown = 1f;
     public float damage = 15;
     // public AudioClip attackSound;
+
+    private RaycastHit raycastHit;
 
     // Start is called before the first frame update
     void Start()
@@ -32,11 +37,22 @@ public class MeleeController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (swingAction.WasPressedThisFrame())
+        if (swingAction.WasPressedThisFrame() && canAttack)
         {
-            if (canAttack)
+            SwordAttack();
+            if (Physics.Raycast(cam.transform.position, cam.transform.forward, out raycastHit, attackRange, whatIsEnemy))
             {
-                SwordAttack();
+                //Debug.Log(raycastHit.collider.name);
+                if (raycastHit.collider.CompareTag("Enemy"))
+                {
+                    //Debug.Log("Bullet Hit!");
+                    //Invoke("ResetShot", fireRate); // calling the function below completely exits this FireGun function and i don't know why
+                    //raycastHit.collider.GetComponent<Health>().RemoveHealth(damage);
+                    //SwordAttack();
+                    //GameObject enemyObject = raycastHit.collider.gameObject;
+
+                    raycastHit.collider.gameObject.GetComponent<Health>().RemoveHealth(damage);
+                }
             }
         }
     }

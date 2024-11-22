@@ -696,6 +696,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sensitivityX: 20
   sensitivityY: 20
+  startingPlayerRotation: 0
   orientation: {fileID: 2636907407777984800}
   cameraHolder: {fileID: 367566074214305770}
   playerControls: {fileID: -944628639613478452, guid: 32e4bc4f969d904428a347847e605b04,
@@ -1461,7 +1462,7 @@ MonoBehaviour:
   _maximumHealth: 100
   _currentHealth: 100
   _HealthBarFIll: {fileID: 5286482733370066478}
-  sceneNumber: 0
+  sceneToReload: Title Screen
 --- !u!1 &4742906524563140654
 GameObject:
   m_ObjectHideFlags: 0
@@ -1954,8 +1955,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _maximumHealth: 100
   _currentHealth: 100
-  _HealthBarFIll: {fileID: 0}
-  sceneNumber: 0
+  _HealthBarFIll: {fileID: 5286482733370066478}
+  sceneToReload: Title Screen
 --- !u!1 &5105056359087873797
 GameObject:
   m_ObjectHideFlags: 0

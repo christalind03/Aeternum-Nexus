@@ -78,9 +78,13 @@ public class Sliding : MonoBehaviour
 
     void StopSlide()
     {
-        playerMovement.isSliding = false;
-        playerObject.localScale = new Vector3(playerObject.localScale.x, startYScale, playerObject.localScale.z);
-        playerMovement.groundDrag = originalDrag;
+        if (playerObject != null)
+        {
+            playerMovement.isSliding = false;
+            playerObject.localScale = new Vector3(playerObject.localScale.x, startYScale, playerObject.localScale.z);
+            playerMovement.groundDrag = originalDrag;
+        }
+        
     }
 
     void SlidingMovement()

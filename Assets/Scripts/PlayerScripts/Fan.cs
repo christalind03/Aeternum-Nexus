@@ -9,16 +9,9 @@ public class thing : MonoBehaviour
     Rigidbody playerBody;
     // Start is called before the first frame update
 
-    //TEMP
-    private Health playerHealth;
     void Start()
     {
         playerBody = player.GetComponent<Rigidbody>();
-        playerHealth = player.GetComponent <Health>();
-        if (playerHealth == null)
-        {
-            Debug.LogError("No Health component found on the player GameObject.");
-        }
     }
 
     void OnTriggerStay(Collider collision)
@@ -33,6 +26,7 @@ public class thing : MonoBehaviour
             {
                 playerBody.AddForce(Vector3.forward * fanForce, ForceMode.Force);
             }
+
         }
     }
 }

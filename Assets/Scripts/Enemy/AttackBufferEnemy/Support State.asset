@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8551e78821bb784485dc27f3f135365, type: 3}
   m_Name: Support State
   m_EditorClassIdentifier: 
-  _supportDuration: 3
-  _supportPercentage: 0.5
-  _supportRadius: 10
+  SupportDuration: 3
+  SupportPercentage: 2.5
+  SupportRadius: 5
