@@ -25,10 +25,14 @@ public class MeleeController : MonoBehaviour
     // public AudioClip attackSound;
 
     private RaycastHit raycastHit;
+    private float _initialDamage;
+    private Coroutine _activeDebuff;
 
     // Start is called before the first frame update
     void Start()
     {
+        _initialDamage = damage;
+
         swingAction = playerControls.FindActionMap("Combat").FindAction("Attack");
         swingAction.Enable(); // ????
     }
@@ -93,5 +97,29 @@ public class MeleeController : MonoBehaviour
     {
         yield return new WaitForSeconds(attackCooldown);
         isAttacking = false;
+    }
+
+    public void AttackDebuff(float debuffDuration, float debuffPercentage)
+    {
+        // Ensure we aren't overriding coroutines
+        if (_activeDebuff != null)
+        {
+            StopCoroutine(_activeDebuff);
+        }
+
+        _activeDebuff = StartCoroutine(HandleDebuff(debuffDuration, debuffPercentage));
+    }
+
+    private IEnumerator HandleDebuff(float debuffDuration, float debuffPercentage)
+    {
+        if (damage == _initialDamage)
+        {
+            damage -= (damage * debuffPercentage);
+        }
+
+        yield return new WaitForSeconds(debuffDuration);
+
+        damage = _initialDamage;
+        _activeDebuff = null;
     }
 }

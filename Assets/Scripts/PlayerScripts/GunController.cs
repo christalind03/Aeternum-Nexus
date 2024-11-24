@@ -23,9 +23,14 @@ public class GunController : MonoBehaviour
     [Header("Graphics")]
     public GameObject muzzleFlash;
 
+    private float _initialDamage;
+    private Coroutine _activeDebuff;
+
     // Start is called before the first frame update
     void Start()
     {
+        _initialDamage = damage;
+
         isReadyToFire = true;
         shootAction = playerControls.FindActionMap("Combat").FindAction("Attack");
     }
@@ -76,5 +81,29 @@ public class GunController : MonoBehaviour
     void ResetShot()
     {
         isReadyToFire = true;
+    }
+
+    public void AttackDebuff(float debuffDuration, float debuffPercentage)
+    {
+        // Ensure we aren't overriding coroutines
+        if (_activeDebuff != null)
+        {
+            StopCoroutine(_activeDebuff);
+        }
+
+        _activeDebuff = StartCoroutine(HandleDebuff(debuffDuration, debuffPercentage));
+    }
+
+    private IEnumerator HandleDebuff(float debuffDuration, float debuffPercentage)
+    {
+        if (damage == _initialDamage)
+        {
+            damage -= (damage * debuffPercentage);
+        }
+
+        yield return new WaitForSeconds(debuffDuration);
+
+        damage = _initialDamage;
+        _activeDebuff = null;
     }
 }
