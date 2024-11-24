@@ -41,7 +41,7 @@ public class GunController : MonoBehaviour
         isShooting = allowButtonHold ? shootAction.IsPressed() : shootAction.WasPressedThisFrame();
         if (isReadyToFire && isShooting)
         {
-            Debug.Log("shot gun");
+            //Debug.Log("shot gun");
             FireGun();
         }
     }
@@ -51,12 +51,22 @@ public class GunController : MonoBehaviour
         isReadyToFire = false;
         if (Physics.Raycast(cam.transform.position, cam.transform.forward, out raycastHit, range, whatIsEnemy))
         {
-            Debug.Log(raycastHit.collider.name);
+            //Debug.Log(raycastHit.collider.name);
             if (raycastHit.collider.CompareTag("Enemy"))
             {
-                Debug.Log("Bullet Hit!");
+                //Debug.Log("Bullet Hit!");
                 Invoke("ResetShot", fireRate); // calling the function below completely exits this FireGun function and i don't know why
-                raycastHit.collider.GetComponent<Health>().RemoveHealth(damage);
+
+                GameObject enemyObject = raycastHit.collider.gameObject;
+
+                if (enemyObject.TryGetComponent(out EnemyShield enemyShield))
+                {
+                    Destroy(enemyShield);
+                }
+                else
+                {
+                    enemyObject.GetComponent<Health>().RemoveHealth(damage);
+                }
             }
         }
 

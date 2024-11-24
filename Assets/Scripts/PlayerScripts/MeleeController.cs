@@ -51,7 +51,15 @@ public class MeleeController : MonoBehaviour
                     //SwordAttack();
                     //GameObject enemyObject = raycastHit.collider.gameObject;
 
-                    raycastHit.collider.gameObject.GetComponent<Health>().RemoveHealth(damage);
+                    GameObject enemyObject = raycastHit.collider.gameObject;
+
+                    if (enemyObject.TryGetComponent(out EnemyShield enemyShield))
+                    {
+                        Destroy(enemyShield);
+                    } else
+                    {
+                        enemyObject.GetComponent<Health>().RemoveHealth(damage);
+                    }
                 }
             }
         }
