@@ -156,6 +156,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 2064977781}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &68671591 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7556761063895598629, guid: 8d5ab626d701a2348940ab02ee3371d9,
+    type: 3}
+  m_PrefabInstance: {fileID: 1863866986}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &90422806 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -7080008205057387153, guid: 12392f2d8081a0843b04a8e333e19fe6,
@@ -782,7 +794,7 @@ MonoBehaviour:
   m_FillMethod: 0
   m_FillAmount: 1
   m_FillClockwise: 1
-  m_FillOrigin: 0
+  m_FillOrigin: 1
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
 --- !u!222 &232330492
@@ -10454,6 +10466,18 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 2534964839176971238, guid: 12392f2d8081a0843b04a8e333e19fe6, type: 3}
+--- !u!114 &1069542261 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 256002914913787630, guid: 8d5ab626d701a2348940ab02ee3371d9,
+    type: 3}
+  m_PrefabInstance: {fileID: 1863866986}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &1084188726 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 12392f2d8081a0843b04a8e333e19fe6,
@@ -14422,6 +14446,16 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7039595196742915199, guid: 8d5ab626d701a2348940ab02ee3371d9,
+        type: 3}
+      propertyPath: _DashBarBack
+      value: 
+      objectReference: {fileID: 68671591}
+    - target: {fileID: 7039595196742915199, guid: 8d5ab626d701a2348940ab02ee3371d9,
+        type: 3}
+      propertyPath: _DashBarFIll
+      value: 
+      objectReference: {fileID: 1069542261}
     - target: {fileID: 7087665678264436596, guid: 8d5ab626d701a2348940ab02ee3371d9,
         type: 3}
       propertyPath: m_Name
