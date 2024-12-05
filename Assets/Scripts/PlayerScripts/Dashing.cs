@@ -13,6 +13,7 @@ public class Dashing : MonoBehaviour
     public InputActionAsset playerControls;
     Rigidbody playerBody;
     PlayerMovement playerMovement;
+    PlayerAudio playerAudio;
 
     [Header("Dashing")]
     public float dashForce;
@@ -55,6 +56,7 @@ public class Dashing : MonoBehaviour
 
         playerBody = GetComponent<Rigidbody>();
         playerMovement = GetComponent<PlayerMovement>();
+        playerAudio = GetComponent<PlayerAudio>();
     }   
 
     // Update is called once per frame
@@ -78,6 +80,8 @@ public class Dashing : MonoBehaviour
         {
             return;
         }
+        
+        playerAudio.PlayPlayerAudio("dash");
         dashCoolDownTimer = dashCoolDown;
 
         playerMovement.isDashing = true;
