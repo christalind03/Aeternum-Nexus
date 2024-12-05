@@ -9,6 +9,7 @@ public class DamageBoost : MonoBehaviour
     public GameObject meleeHolder;
     public GameObject gunHolder;
     public GameObject playerCamera;
+    public GameObject cube;
     MeleeController meleeControl;
     GunController gunControl;
     SwitchWeapon switchWeapon;
@@ -44,7 +45,7 @@ public class DamageBoost : MonoBehaviour
                 gunControl.damage = originalGunDamage;
 
                 boostIsActive = false;
-                Destroy(gameObject);
+                Destroy(transform.parent.gameObject);
             }
         }
     }
@@ -58,6 +59,7 @@ public class DamageBoost : MonoBehaviour
 
             boostIsActive = true;
             gameObject.GetComponent<MeshRenderer>().enabled = false;
+            cube.GetComponent<MeshRenderer>().enabled = false;
         }
     }
     

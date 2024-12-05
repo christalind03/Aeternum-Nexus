@@ -48,6 +48,10 @@ public class PlayerMovement : MonoBehaviour
     public Transform orientation;
     public InputActionAsset playerControls;
     public GameObject sword;
+    public GameObject gun;
+    public PlayerCamera playerCamera;
+    SwitchWeapon switchWeapon;
+
     Animator animatorObj;
 
     float horizontalInput;
@@ -56,6 +60,7 @@ public class PlayerMovement : MonoBehaviour
     Vector3 moveDirection;
 
     Rigidbody playerBody;
+    PlayerAudio playerAudio;
 
     InputAction moveAction;
     InputAction jumpAction;
@@ -94,7 +99,8 @@ public class PlayerMovement : MonoBehaviour
         normalYScale = transform.localScale.y;
         normalSpeed = playerSpeed;
 
-        animatorObj = sword.GetComponent<Animator>();
+        switchWeapon = playerCamera.GetComponent<SwitchWeapon>();
+        playerAudio = GetComponent<PlayerAudio>();
 
         playerBody.freezeRotation = true; // removes physics engine's control over the rigidbody
         canJump = true;
@@ -103,6 +109,15 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (switchWeapon.isMeleeActive)
+        {
+            animatorObj = sword.GetComponent<Animator>();
+        }
+        else
+        {
+            animatorObj = gun.GetComponent<Animator>();
+        }
+        
         // checks if player is grounded using a raycast to find the ground
         isGrounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, whatIsGround);
 
@@ -156,15 +171,22 @@ public class PlayerMovement : MonoBehaviour
     bool keepMomentum;
     void StateHandler()
     {
+        if (isSliding && !isWallRunning && isGrounded)
+        {
+            playerAudio.LoopAudio("slide", true);
+        }
+
         if (isDashing) // dashing state
         {
             state = MovementState.dashing;
             desiredMoveSpeed = dashSpeed;
             animatorObj.SetBool("isMoving", true);
+            playerAudio.LoopAudio("move", false);
         }
-        else if (playerBody.velocity.magnitude < 3 && horizontalInput == 0 && verticalInput == 0 && !isCrouching) // standing state
+        else if (playerBody.velocity.magnitude < 3 && horizontalInput == 0 && verticalInput == 0 && !isCrouching && isGrounded) // standing state
         {
             animatorObj.SetBool("isMoving", false);
+            playerAudio.LoopAudio("move", false);
             state = MovementState.standing;
             desiredMoveSpeed = normalSpeed;
         }
@@ -173,6 +195,7 @@ public class PlayerMovement : MonoBehaviour
             state = MovementState.wallrunning;
             desiredMoveSpeed = wallRunSpeed;
             animatorObj.SetBool("isMoving", true);
+            playerAudio.LoopAudio("move", true);
         }
         else if (isSliding) // sliding state
         {
@@ -190,6 +213,7 @@ public class PlayerMovement : MonoBehaviour
         }
         else if (isCrouching) // crouched state
         {
+            playerAudio.LoopAudio("move", false);
             if (horizontalInput == 0 && verticalInput == 0)
             {
                 animatorObj.SetBool("isMoving", false);
@@ -206,14 +230,21 @@ public class PlayerMovement : MonoBehaviour
         else if (isGrounded) // moving state
         {
             animatorObj.SetBool("isMoving", true);
+            playerAudio.LoopAudio("move", true);
             state = MovementState.moving;
             desiredMoveSpeed = normalSpeed;
         }
         else // air movement state
         {
             animatorObj.SetBool("isMoving", true);
+            playerAudio.LoopAudio("move", false);
             state = MovementState.air;
             desiredMoveSpeed = normalSpeed; // as of right now, dashing resets movement to normal speed
+        }
+
+        if (lastState == MovementState.air && isGrounded)
+        {
+            playerAudio.PlayPlayerAudio("land");
         }
 
         if (lastState != MovementState.crouching && state != MovementState.dashing && playerBody.velocity.magnitude > 3 && Mathf.Abs(desiredMoveSpeed - lastDesiredMoveSpeed) > 1f) // allows smooth transition between speeds when not moving from crouching or dashing
@@ -326,6 +357,8 @@ public class PlayerMovement : MonoBehaviour
     void Jump()
     {
         // resets vertical velocity
+        playerAudio.PlayPlayerAudio("jump");
+
         playerBody.velocity = new Vector3(playerBody.velocity.x, 0f, playerBody.velocity.z);
         if (OnSlope())
         {
