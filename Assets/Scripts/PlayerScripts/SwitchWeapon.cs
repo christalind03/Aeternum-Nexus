@@ -11,6 +11,8 @@ public class SwitchWeapon : MonoBehaviour
     public InputActionAsset playerControls;
     PlayerMovement playerMovement;
     InputAction switchWeapon;
+    EquipAudio equipAudio;
+
     [HideInInspector] public bool isMeleeActive;
 
     // Start is called before the first frame update
@@ -19,10 +21,11 @@ public class SwitchWeapon : MonoBehaviour
         switchWeapon = playerControls.FindActionMap("Combat").FindAction("Switch Weapon");
         switchWeapon.Enable();
 
-        meleeHolder.SetActive(true);
-        gunHolder.SetActive(false);
+        meleeHolder.SetActive(false);
+        gunHolder.SetActive(true);
 
-        isMeleeActive = true;
+        isMeleeActive = false;
+        equipAudio = GetComponent<EquipAudio>();
     }
 
     // Update is called once per frame
@@ -47,12 +50,14 @@ public class SwitchWeapon : MonoBehaviour
     {
         meleeHolder.SetActive(true);
         gunHolder.SetActive(false);
+        equipAudio.PlayEquipAudio("sword", true);
     }
 
     void SwitchToGun()
     {
         meleeHolder.SetActive(false);
         gunHolder.SetActive(true);
+        equipAudio.PlayEquipAudio("gun", true);
     }
 }
 

@@ -11,6 +11,9 @@ public class LevelSelectEvents : MonoBehaviour
     public string Level1 = "Level1";
     public string Level1Boss = "Boss1";
 
+    public AudioClip buttonClickSound;
+    AudioSource _audioSource;
+
     private Button topR;
     private Button topL;
     private Button botR;
@@ -29,12 +32,19 @@ public class LevelSelectEvents : MonoBehaviour
         topL.RegisterCallback<ClickEvent>(OnTopLeft);
         botR.RegisterCallback<ClickEvent>(OnBottomRight);
         botL.RegisterCallback<ClickEvent>(OnBottomLeft);
+
+        var audioManager = FindObjectOfType<AudioManager>();
+        if (audioManager != null)
+        {
+            _audioSource = audioManager.GetComponent<AudioSource>();
+        }
     }
 
     private void OnTopRight(ClickEvent click)
     { 
         {
             Debug.Log("Enter scene: Level1");
+            PlayButtonSound();
             SceneManager.LoadScene(Level1);
         }
     }
@@ -42,19 +52,29 @@ public class LevelSelectEvents : MonoBehaviour
     {
         {
             Debug.Log("Currently locked(level2)");
+            PlayButtonSound();
         }
     }
     private void OnBottomRight(ClickEvent click)
     {
         {
             Debug.Log("Enter scene:LOCKEDLevel1-Boss");
-            
+            PlayButtonSound();
         }
     }
     private void OnBottomLeft(ClickEvent click)
     {
         {
             Debug.Log("Currently locked(level2)");
+            PlayButtonSound();
+        }
+    }
+
+    void PlayButtonSound()
+    {
+        if (buttonClickSound != null && _audioSource != null)
+        {
+            _audioSource.PlayOneShot(buttonClickSound);
         }
     }
 }
