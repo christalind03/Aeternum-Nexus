@@ -24,9 +24,13 @@ public class GunController : MonoBehaviour
     [Header("Graphics")]
     public ParticleSystem muzzleFlash;
 
+    private float _initialDamage;
+    private Coroutine _activeDebuff;
+
     // Start is called before the first frame update
     void Start()
     {
+        _initialDamage = damage;
         weaponAudio = GetComponent<WeaponAudio>();
 
         isReadyToFire = true;
@@ -44,7 +48,7 @@ public class GunController : MonoBehaviour
         isShooting = allowButtonHold ? shootAction.IsPressed() : shootAction.WasPressedThisFrame();
         if (isReadyToFire && isShooting)
         {
-            Debug.Log("shot gun");
+            //Debug.Log("shot gun");
 
             Animator animatorObj = gun.GetComponent<Animator>();
             animatorObj.SetTrigger("Attack");

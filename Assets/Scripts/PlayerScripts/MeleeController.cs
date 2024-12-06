@@ -27,10 +27,13 @@ public class MeleeController : MonoBehaviour
     // public AudioClip attackSound;
 
     private RaycastHit raycastHit;
+    private float _initialDamage;
+    private Coroutine _activeDebuff;
 
     // Start is called before the first frame update
     void Start()
     {
+        _initialDamage = damage;
         weaponAudio = GetComponent<WeaponAudio>();
 
         swingAction = playerControls.FindActionMap("Combat").FindAction("Attack");
@@ -54,6 +57,16 @@ public class MeleeController : MonoBehaviour
                     //raycastHit.collider.GetComponent<Health>().RemoveHealth(damage);
                     //SwordAttack();
                     //GameObject enemyObject = raycastHit.collider.gameObject;
+                    GameObject enemyObject = raycastHit.collider.gameObject;
+
+                    if (enemyObject.TryGetComponent(out EnemyShield enemyShield))
+                    {
+                        Destroy(enemyShield);
+                    }
+                    else
+                    {
+                        enemyObject.GetComponent<Health>().RemoveHealth(damage);
+                    }
                     raycastHit.collider.gameObject.GetComponent<Health>().RemoveHealth(damage);
                     StartCoroutine(PlayHitAudioWithDelay(0.25f));
                 }
