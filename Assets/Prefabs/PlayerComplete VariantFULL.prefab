@@ -75,7 +75,7 @@ GameObject:
   - component: {fileID: 7617425564758235377}
   m_Layer: 3
   m_Name: GunHolder
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -567,6 +567,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8275189302189440956, guid: d4848cfd6a9d0744e8eb92a42787fd8c,
+        type: 3}
+      propertyPath: m_TagString
+      value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 8731163661263369370, guid: d4848cfd6a9d0744e8eb92a42787fd8c,
         type: 3}

@@ -45,7 +45,12 @@ public class Projectile : MonoBehaviour
     {
         if (otherCollider.gameObject.CompareTag("Player"))
         {
-            otherCollider.gameObject.GetComponent<Health>().RemoveHealth(_attackDamage);
+            GameObject playerObject = otherCollider.gameObject;
+
+            if (playerObject.TryGetComponent(out Health playerHealth))
+            {
+                playerHealth.RemoveHealth(_attackDamage);
+            }
         }
 
         Destroy(gameObject);

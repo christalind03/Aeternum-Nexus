@@ -34,7 +34,9 @@ public class MeleeController : MonoBehaviour
     void Start()
     {
         _initialDamage = damage;
+
         weaponAudio = GetComponent<WeaponAudio>();
+
 
         swingAction = playerControls.FindActionMap("Combat").FindAction("Attack");
         swingAction.Enable(); // ????
@@ -69,6 +71,7 @@ public class MeleeController : MonoBehaviour
                     }
                     raycastHit.collider.gameObject.GetComponent<Health>().RemoveHealth(damage);
                     StartCoroutine(PlayHitAudioWithDelay(0.25f));
+
                 }
             }
         }
@@ -107,5 +110,29 @@ public class MeleeController : MonoBehaviour
     {
         yield return new WaitForSeconds(attackCooldown);
         isAttacking = false;
+    }
+
+    public void AttackDebuff(float debuffDuration, float debuffPercentage)
+    {
+        // Ensure we aren't overriding coroutines
+        if (_activeDebuff != null)
+        {
+            StopCoroutine(_activeDebuff);
+        }
+
+        _activeDebuff = StartCoroutine(HandleDebuff(debuffDuration, debuffPercentage));
+    }
+
+    private IEnumerator HandleDebuff(float debuffDuration, float debuffPercentage)
+    {
+        if (damage == _initialDamage)
+        {
+            damage -= (damage * debuffPercentage);
+        }
+
+        yield return new WaitForSeconds(debuffDuration);
+
+        damage = _initialDamage;
+        _activeDebuff = null;
     }
 }
