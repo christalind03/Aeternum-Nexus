@@ -27,8 +27,6 @@ public class GunController : MonoBehaviour
     private float _initialDamage;
     private Coroutine _activeDebuff;
 
-    private float _initialDamage;
-    private Coroutine _activeDebuff;
 
     // Start is called before the first frame update
     void Start()
