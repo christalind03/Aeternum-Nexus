@@ -84,7 +84,7 @@ public class Health : MonoBehaviour
 
     void Update()
     {
-        if (transform.position.y < -50)
+        if (transform.position.y < -10)
         {
             KillPlayer();//fall out of world
         }
