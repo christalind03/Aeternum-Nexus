@@ -54,8 +54,8 @@ public class Health : MonoBehaviour
         if (gameObject.name == "boss1")
         {
             float fillAmount = _currentHealth / _maximumHealth;
-            _HealthBarFIll.color = new Color32(254,0,0,255);
-            _HealthBarBack.color = new Color32(118, 0, 7, 255);
+            //_HealthBarFIll.color = new Color32(254,0,0,255);
+            //_HealthBarBack.color = new Color32(118, 0, 7, 255);
 
         }
 
