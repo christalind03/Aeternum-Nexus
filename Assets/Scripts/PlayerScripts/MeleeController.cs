@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UIElements;
 
 public class MeleeController : MonoBehaviour
 {
@@ -11,6 +12,7 @@ public class MeleeController : MonoBehaviour
     public GameObject sword;
     public GameObject player;
     public LayerMask whatIsEnemy;
+    WeaponAudio weaponAudio;
     public InputActionAsset playerControls;
     InputAction swingAction;
 
@@ -33,6 +35,9 @@ public class MeleeController : MonoBehaviour
     {
         _initialDamage = damage;
 
+        weaponAudio = GetComponent<WeaponAudio>();
+
+
         swingAction = playerControls.FindActionMap("Combat").FindAction("Attack");
         swingAction.Enable(); // ????
     }
@@ -54,19 +59,28 @@ public class MeleeController : MonoBehaviour
                     //raycastHit.collider.GetComponent<Health>().RemoveHealth(damage);
                     //SwordAttack();
                     //GameObject enemyObject = raycastHit.collider.gameObject;
-
                     GameObject enemyObject = raycastHit.collider.gameObject;
 
                     if (enemyObject.TryGetComponent(out EnemyShield enemyShield))
                     {
                         Destroy(enemyShield);
-                    } else
+                    }
+                    else
                     {
                         enemyObject.GetComponent<Health>().RemoveHealth(damage);
                     }
+                    raycastHit.collider.gameObject.GetComponent<Health>().RemoveHealth(damage);
+                    StartCoroutine(PlayHitAudioWithDelay(0.25f));
+
                 }
             }
         }
+    }
+    
+    IEnumerator PlayHitAudioWithDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        weaponAudio.PlayWeaponAudio("meleeHit");
     }
 
     void OnEnable()
@@ -80,8 +94,7 @@ public class MeleeController : MonoBehaviour
         canAttack = false; // currently attacking
         Animator animatorObj = sword.GetComponent<Animator>();
         animatorObj.SetTrigger("Attack");
-        // AudioSource audioClip = GetComponent<AudioSource>();
-        // audioClip.PlayOneShot(attackSound);
+        weaponAudio.PlayWeaponAudio("meleeSwing");
 
         StartCoroutine(ResetAttackCooldown());
     }

@@ -14,14 +14,18 @@ public class GunController : MonoBehaviour
 
     [Header("References")]
     public Camera cam;
-    public Transform attackPoint;
+    public GameObject gun;
     public RaycastHit raycastHit;
     public LayerMask whatIsEnemy;
+    WeaponAudio weaponAudio;
     public InputActionAsset playerControls;
     InputAction shootAction;
 
     [Header("Graphics")]
-    public GameObject muzzleFlash;
+    public ParticleSystem muzzleFlash;
+
+    private float _initialDamage;
+    private Coroutine _activeDebuff;
 
     private float _initialDamage;
     private Coroutine _activeDebuff;
@@ -30,6 +34,7 @@ public class GunController : MonoBehaviour
     void Start()
     {
         _initialDamage = damage;
+        weaponAudio = GetComponent<WeaponAudio>();
 
         isReadyToFire = true;
         shootAction = playerControls.FindActionMap("Combat").FindAction("Attack");
@@ -47,6 +52,12 @@ public class GunController : MonoBehaviour
         if (isReadyToFire && isShooting)
         {
             //Debug.Log("shot gun");
+
+
+            Animator animatorObj = gun.GetComponent<Animator>();
+            animatorObj.SetTrigger("Attack");
+            weaponAudio.PlayWeaponAudio("gunShot");
+
             FireGun();
         }
     }
@@ -75,7 +86,7 @@ public class GunController : MonoBehaviour
             }
         }
 
-        // Instantiate(muzzleFlash, attackPoint.position, Quaternion.identity);
+        muzzleFlash.Play();
         Invoke("ResetShot", fireRate);
     }
     void ResetShot()

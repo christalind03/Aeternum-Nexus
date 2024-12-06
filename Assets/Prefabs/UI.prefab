@@ -320,7 +320,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.078431375, g: 0.6745098, b: 0.90196085, a: 1}
+  m_Color: {r: 0.011764706, g: 0.2901961, b: 0.3882353, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -332,7 +332,7 @@ MonoBehaviour:
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 0
-  m_FillAmount: 0.807
+  m_FillAmount: 0
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
@@ -531,6 +531,7 @@ MonoBehaviour:
   _maximumHealth: 100
   _currentHealth: 50
   _HealthBarFIll: {fileID: 6261952293732368579}
+  _HealthBarBack: {fileID: 0}
   sceneToReload: 
 --- !u!1 &4412519352107068318
 GameObject:
@@ -991,7 +992,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.011764707, g: 0.2901961, b: 0.38823533, a: 1}
+  m_Color: {r: 0.078431375, g: 0.6745098, b: 0.9019608, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1

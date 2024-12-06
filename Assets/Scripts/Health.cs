@@ -15,10 +15,12 @@ public class Health : MonoBehaviour
     public string sceneToReload;
     public float MaximumHealth { get { return _maximumHealth; } }
     public float CurrentHealth { get { return _currentHealth; } }
+    PlayerAudio playerAudio;
     
     private void Start()
     {
         _currentHealth = _maximumHealth;
+
         if(gameObject.name == "boss1")
         {
             _HealthBarFIll.color = new Color32(1, 1, 1, 0);
@@ -43,6 +45,12 @@ public class Health : MonoBehaviour
     public void RemoveHealth(float healthPoints)
     {
         _currentHealth -= healthPoints;
+        if (gameObject.CompareTag("Player"))
+        {
+            playerAudio = gameObject.transform.parent.GetComponent<PlayerAudio>();
+            playerAudio.PlayPlayerAudio("hurt");
+        }
+
         if (gameObject.name == "boss1")
         {
             float fillAmount = _currentHealth / _maximumHealth;

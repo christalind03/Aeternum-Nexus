@@ -200,4 +200,5 @@ MonoBehaviour:
   _maximumHealth: 100
   _currentHealth: 100
   _HealthBarFIll: {fileID: 0}
+  _HealthBarBack: {fileID: 0}
   sceneToReload: 

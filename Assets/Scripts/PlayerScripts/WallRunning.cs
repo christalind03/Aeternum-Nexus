@@ -49,6 +49,7 @@ public class Wallrunning : MonoBehaviour
     public InputActionAsset playerControls;
     PlayerMovement playerMovement;
     Rigidbody playerBody;
+    PlayerAudio playerAudio;
 
     // Start is called before the first frame update
     void Start()
@@ -63,6 +64,7 @@ public class Wallrunning : MonoBehaviour
 
         playerMovement = GetComponent<PlayerMovement>();
         playerBody = GetComponent<Rigidbody>();
+        playerAudio = GetComponent<PlayerAudio>();
     }
 
     // Update is called once per frame
@@ -210,6 +212,7 @@ public class Wallrunning : MonoBehaviour
     {
         exitingWall = true;
         exitWallTimer = exitWallTime;
+        playerAudio.PlayPlayerAudio("jump");
 
         Vector3 wallNormal = isRightWall ? rightWallHit.normal : leftWallHit.normal;
         Vector3 applyForce = transform.up * wallJumpUpForce + wallNormal * wallJumpSideForce;
