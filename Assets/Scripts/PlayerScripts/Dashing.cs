@@ -1,14 +1,19 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
+
 
 public class Dashing : MonoBehaviour
 {
+
+
     [Header("References")]
     public Transform orientation;
     public Transform playerCamera;
     public InputActionAsset playerControls;
     Rigidbody playerBody;
     PlayerMovement playerMovement;
+    PlayerAudio playerAudio;
 
     [Header("Dashing")]
     public float dashForce;
@@ -35,6 +40,11 @@ public class Dashing : MonoBehaviour
     InputAction moveAction;
     Vector2 moveInput;
 
+    [Header("Dash Bar")]
+    [SerializeField] private Image _DashBarFIll;
+    [SerializeField] private Image _DashBarBack;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -46,6 +56,7 @@ public class Dashing : MonoBehaviour
 
         playerBody = GetComponent<Rigidbody>();
         playerMovement = GetComponent<PlayerMovement>();
+        playerAudio = GetComponent<PlayerAudio>();
     }   
 
     // Update is called once per frame
@@ -54,10 +65,12 @@ public class Dashing : MonoBehaviour
         if (dashAction.WasPressedThisFrame())
         {
             Dash();
+            UpdateDashBar();
         }
         if (dashCoolDownTimer > 0)
         {
             dashCoolDownTimer -= Time.deltaTime;
+            UpdateDashBar();
         }
     }
 
@@ -67,6 +80,8 @@ public class Dashing : MonoBehaviour
         {
             return;
         }
+        
+        playerAudio.PlayPlayerAudio("dash");
         dashCoolDownTimer = dashCoolDown;
 
         playerMovement.isDashing = true;
@@ -95,6 +110,15 @@ public class Dashing : MonoBehaviour
         delayedApplyForce = applyForce;
         Invoke(nameof(DelayedDashForce), 0.025f);
         Invoke(nameof(ResetDash), dashDuration); // stops dash
+    }
+    private void UpdateDashBar()
+    {
+        if (gameObject.CompareTag("Player"))
+        {
+            float fillAmount = dashCoolDownTimer;
+            _DashBarFIll.fillAmount = fillAmount;
+        }
+        
     }
 
     Vector3 delayedApplyForce;

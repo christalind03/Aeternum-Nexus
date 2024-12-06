@@ -24,7 +24,7 @@ public class Enemy<EState> : StateManager<EState> where EState : Enum
     protected EnemyContext _context;
     protected bool _canAttack;
 
-    private void Awake()
+    protected virtual void Awake()
     {
         _initialPosition = transform.position;
         _initialRotation = transform.rotation;
