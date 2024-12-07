@@ -158,17 +158,6 @@
                 },
                 {
                     "name": "",
-                    "id": "85bed05d-6661-4b26-b6f3-5563c2095b72",
-                    "path": "<Keyboard>/c",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Crouch",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "11e73721-8d62-4504-8085-4cdcd10e87ef",
                     "path": "<Keyboard>/leftShift",
                     "interactions": "",
@@ -208,6 +197,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "Dash",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "88ba16c5-b333-4588-85d4-2082e2d47100",
+                    "path": "<Keyboard>/c",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Crouch",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

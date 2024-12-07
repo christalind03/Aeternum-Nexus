@@ -16,6 +16,7 @@ public class Health : MonoBehaviour
     public float MaximumHealth { get { return _maximumHealth; } }
     public float CurrentHealth { get { return _currentHealth; } }
     PlayerAudio playerAudio;
+    EnemyAudio enemyAudio;
     
     private void Start()
     {
@@ -49,6 +50,11 @@ public class Health : MonoBehaviour
         {
             playerAudio = gameObject.transform.parent.GetComponent<PlayerAudio>();
             playerAudio.PlayPlayerAudio("hurt");
+        }
+        if (gameObject.CompareTag("Enemy"))
+        {
+            enemyAudio = GetComponent<EnemyAudio>();
+            enemyAudio.PlayEnemyAudio("hurt");
         }
 
         if (gameObject.name == "boss1")
