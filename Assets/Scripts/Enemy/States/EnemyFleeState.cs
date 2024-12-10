@@ -30,6 +30,11 @@ public class EnemyFleeState<EState> : EnemyState<EState> where EState : Enum
     {
         _initialSpeed = Context.NavMeshAgent.acceleration;
         Context.NavMeshAgent.acceleration = FleeSpeed;
+
+        if (Context.Animator != null)
+        {
+            Context.Animator.SetTrigger("Flee");
+        }
     }
 
     public override void ExitState()

@@ -77,6 +77,7 @@ public class Health : MonoBehaviour
         if (_currentHealth <= 0)
         {
             KillPlayer();
+            return;
         }
         
         UpdateHealthBar();

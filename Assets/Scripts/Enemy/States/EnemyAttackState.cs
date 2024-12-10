@@ -14,7 +14,11 @@ public class EnemyAttackState<EState>: EnemyState<EState> where EState : Enum
     {
         GameObject playerObject = GameObject.Find("Player"); // Contains the Health script
 
-        Context.Animator.SetTrigger("Attack");
+        if (Context.Animator !=  null)
+        {
+            Context.Animator.SetTrigger("Attack");
+        }
+
         playerObject?.GetComponent<Health>().RemoveHealth(Context.AttackDamage);
     }
 

@@ -11,7 +11,10 @@ public class EnemyChaseState<EState> : EnemyState<EState> where EState : Enum
 
     public override void EnterState()
     {
-        Context.Animator.SetTrigger("Chase");
+        if (Context.Animator != null)
+        {
+            Context.Animator.SetTrigger("Chase");
+        }
     }
 
     public override void ExitState() { }

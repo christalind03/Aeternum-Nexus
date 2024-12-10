@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1f080d0448fd9f45b75bc4051393a3a, type: 3}
   m_Name: Support State
   m_EditorClassIdentifier: 
-  _supportRadius: 10
-  _supportLayers:
+  SupportRadius: 3.5
+  SupportLayers:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 128
