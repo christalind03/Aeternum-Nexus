@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -16,6 +17,9 @@ public class Health : MonoBehaviour
     public float MaximumHealth { get { return _maximumHealth; } }
     public float CurrentHealth { get { return _currentHealth; } }
     PlayerAudio playerAudio;
+
+    private Animator _animator;
+    private NavMeshAgent _navMeshAgent;
     
     private void Start()
     {
@@ -25,10 +29,10 @@ public class Health : MonoBehaviour
         {
             _HealthBarFIll.color = new Color32(1, 1, 1, 0);
             _HealthBarBack.color = new Color32(1, 1, 1, 0);
-
         }
 
-
+        _animator = GetComponentInChildren<Animator>();
+        _navMeshAgent = GetComponentInChildren<NavMeshAgent>();
     }
 
     public void AddHealth(float healthPoints)
@@ -45,10 +49,20 @@ public class Health : MonoBehaviour
     public void RemoveHealth(float healthPoints)
     {
         _currentHealth -= healthPoints;
+
         if (gameObject.CompareTag("Player"))
         {
             playerAudio = gameObject.transform.parent.GetComponent<PlayerAudio>();
-            playerAudio.PlayPlayerAudio("hurt");
+            //playerAudio.PlayPlayerAudio("hurt");
+        }
+
+        if (gameObject.CompareTag("Enemy"))
+        {
+            if (_animator != null)
+            {
+                //_animator.SetTrigger("Hit");
+                StartCoroutine(HitEnemy());
+            }
         }
 
         if (gameObject.name == "boss1")
@@ -86,21 +100,45 @@ public class Health : MonoBehaviour
     {
         if (transform.position.y < -10)
         {
-            KillPlayer();//fall out of world
+            KillPlayer(); //fall out of world
         }
+
         //Debug.Log(_currentHealth);
     }
 
     void KillPlayer()
     {
-        Debug.Log("dead");
-        
-        if (gameObject.CompareTag("Player")|| gameObject.name == "boss1" || gameObject.name == "Exit")
+        if (gameObject.CompareTag("Player") || gameObject.name == "boss1" || gameObject.name == "Exit")
         {
             SceneManager.LoadScene(sceneToReload);
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.None;
+            
+            Destroy(gameObject);
         }
-        Destroy(gameObject);
+
+        if (gameObject.CompareTag("Enemy"))
+        {
+            if (_animator != null)
+            {
+                _animator.ResetTrigger("Attack");
+                _animator.ResetTrigger("Hit");
+                _animator.ResetTrigger("Idle");
+
+                _animator.SetTrigger("Death");
+            }
+        }
+    }
+    private IEnumerator HitEnemy()
+    {
+        int stateHash = _animator.GetCurrentAnimatorStateInfo(0).shortNameHash;
+
+        _navMeshAgent.isStopped = true;
+        _animator.SetTrigger("Hit");
+
+        yield return new WaitForSeconds(1f); // Arbitrary number to allow the death animation to be played in full.
+        
+        _navMeshAgent.isStopped = false;
+        _animator.Play(stateHash, 0);
     }
 }

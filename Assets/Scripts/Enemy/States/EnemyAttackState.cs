@@ -12,13 +12,10 @@ public class EnemyAttackState<EState>: EnemyState<EState> where EState : Enum
 
     public override void EnterState()
     {
-        Context.NavMeshAgent.isStopped = true;
-
-        //Debug.Log($"Dealt {Context.AttackDamage} damage!");
         GameObject playerObject = GameObject.Find("Player"); // Contains the Health script
-        playerObject?.GetComponent<Health>().RemoveHealth(Context.AttackDamage);
 
-        Context.NavMeshAgent.isStopped = false;
+        Context.Animator.SetTrigger("Attack");
+        playerObject?.GetComponent<Health>().RemoveHealth(Context.AttackDamage);
     }
 
     public override void ExitState() { }

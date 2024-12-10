@@ -9,7 +9,10 @@ public class EnemyChaseState<EState> : EnemyState<EState> where EState : Enum
         base.Initialize(context, estate);
     }
 
-    public override void EnterState() { }
+    public override void EnterState()
+    {
+        Context.Animator.SetTrigger("Chase");
+    }
 
     public override void ExitState() { }
 
