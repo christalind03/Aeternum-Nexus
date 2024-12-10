@@ -13,6 +13,8 @@ public class Health : MonoBehaviour
     [SerializeField] private Image _HealthBarFIll;
     [SerializeField] private Image _HealthBarBack;
 
+    [SerializeField] public bool canTakeDamage;
+
     public string sceneToReload;
     public float MaximumHealth { get { return _maximumHealth; } }
     public float CurrentHealth { get { return _currentHealth; } }
@@ -33,6 +35,11 @@ public class Health : MonoBehaviour
 
         _animator = GetComponentInChildren<Animator>();
         _navMeshAgent = GetComponentInChildren<NavMeshAgent>();
+        if (gameObject.CompareTag("Player"))
+        {
+            Debug.Log("start bool:" + canTakeDamage);
+        }
+
     }
 
     public void AddHealth(float healthPoints)
@@ -48,9 +55,15 @@ public class Health : MonoBehaviour
 
     public void RemoveHealth(float healthPoints)
     {
-        _currentHealth -= healthPoints;
 
         if (gameObject.CompareTag("Player"))
+        {
+            Debug.Log("Cantakedamagebool:" + canTakeDamage);
+
+        }
+
+        //_currentHealth -= healthPoints;
+        if (gameObject.CompareTag("Player") && canTakeDamage == true)
         {
             playerAudio = gameObject.transform.parent.GetComponent<PlayerAudio>();
             //playerAudio.PlayPlayerAudio("hurt");
@@ -63,6 +76,14 @@ public class Health : MonoBehaviour
                 //_animator.SetTrigger("Hit");
                 StartCoroutine(HitEnemy());
             }
+            playerAudio.PlayPlayerAudio("hurt");
+            
+        }
+
+        if (canTakeDamage == true)
+        {
+            _currentHealth -= healthPoints;
+            
         }
 
         if (gameObject.name == "boss1")
