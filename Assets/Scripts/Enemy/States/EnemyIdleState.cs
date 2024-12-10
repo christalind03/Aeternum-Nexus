@@ -40,7 +40,7 @@ public class EnemyIdleState<EState> : EnemyState<EState> where EState : Enum
 
         Context.NavMeshAgent.SetDestination(Context.InitialPosition);
 
-        if (_isAnimated)
+        if (_isAnimated && Context.Animator != null)
         {
             Context.Animator.SetTrigger("Idle");
         }
@@ -67,8 +67,11 @@ public class EnemyIdleState<EState> : EnemyState<EState> where EState : Enum
                 
                 if (!_isAnimated)
                 {
-                    Context.Animator.SetTrigger("Idle");
-                    _isAnimated = true;
+                    if (Context.Animator != null)
+                    {
+                        Context.Animator.SetTrigger("Idle");
+                        _isAnimated = true;
+                    }
                 }
             }
 
