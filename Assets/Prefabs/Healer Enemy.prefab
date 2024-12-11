@@ -95,7 +95,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _angle: 55
-  _distance: 10
+  _distance: 12.5
   _height: 3
   _heightOffset: -1
   _subdivisionFactor: 5
@@ -124,6 +124,7 @@ MonoBehaviour:
   _currentHealth: 0
   _HealthBarFIll: {fileID: 0}
   _HealthBarBack: {fileID: 0}
+  canTakeDamage: 0
   sceneToReload: 
 --- !u!114 &7442407912347780457
 MonoBehaviour:

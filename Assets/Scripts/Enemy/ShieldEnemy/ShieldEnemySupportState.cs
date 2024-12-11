@@ -27,6 +27,11 @@ public class ShieldEnemySupportState : EnemyState<ShieldEnemy.EEnemyState>
 
     public override void EnterState()
     {
+        if (Context.Animator != null)
+        {
+            Context.Animator.SetTrigger("Support");
+        }
+
         int totalColliders = Physics.OverlapSphereNonAlloc(Context.Transform.position, SupportRadius, _detectedAllies, AllyMask, QueryTriggerInteraction.Collide);
 
         for (int i = 0; i < totalColliders; i++)

@@ -76,14 +76,15 @@ public class Health : MonoBehaviour
                 //_animator.SetTrigger("Hit");
                 StartCoroutine(HitEnemy());
             }
-            playerAudio.PlayPlayerAudio("hurt");
-            
+
+            _currentHealth -= healthPoints;
+            //playerAudio.PlayPlayerAudio("hurt");
+
         }
 
         if (canTakeDamage == true)
         {
             _currentHealth -= healthPoints;
-            
         }
 
         if (gameObject.name == "boss1")
