@@ -478,6 +478,11 @@ PrefabInstance:
       propertyPath: sword
       value: 
       objectReference: {fileID: 7971588058286032947}
+    - target: {fileID: 3089350448956560920, guid: d4848cfd6a9d0744e8eb92a42787fd8c,
+        type: 3}
+      propertyPath: slopeJumpForce
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 4979511104237145787, guid: d4848cfd6a9d0744e8eb92a42787fd8c,
         type: 3}
       propertyPath: m_Name
@@ -576,7 +581,7 @@ PrefabInstance:
     - target: {fileID: 8731163661263369370, guid: d4848cfd6a9d0744e8eb92a42787fd8c,
         type: 3}
       propertyPath: m_DefaultActionMap
-      value: c3b131ba-4051-480f-afd8-cdebaa40c9e1
+      value: Movement
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

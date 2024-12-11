@@ -509,6 +509,7 @@ MonoBehaviour:
   _currentHealth: 1
   _HealthBarFIll: {fileID: 0}
   _HealthBarBack: {fileID: 0}
+  canTakeDamage: 0
   sceneToReload: Title Screen
 --- !u!1 &137774085 stripped
 GameObject:
@@ -8202,8 +8203,8 @@ MonoBehaviour:
   gunHolder: {fileID: 1863866987}
   playerCamera: {fileID: 1863866989}
   cube: {fileID: 1190820337}
-  damageModifier: 0.25
-  timeWithBoost: 5
+  damageModifier: 1
+  timeWithBoost: 30
 --- !u!1 &1761398612 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8740841237538046645, guid: e4610a48aaa3f6b43a640a61c672a39e,
@@ -8531,7 +8532,7 @@ PrefabInstance:
     - target: {fileID: 2934883274990123079, guid: 8d5ab626d701a2348940ab02ee3371d9,
         type: 3}
       propertyPath: damage
-      value: 34
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 2934883274990123079, guid: 8d5ab626d701a2348940ab02ee3371d9,
         type: 3}
@@ -8964,7 +8965,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.5
   m_Pitch: 1
   Loop: 0
   Mute: 0

@@ -19,6 +19,7 @@ public class Health : MonoBehaviour
     public float MaximumHealth { get { return _maximumHealth; } }
     public float CurrentHealth { get { return _currentHealth; } }
     PlayerAudio playerAudio;
+    EnemyAudio enemyAudio;
 
     private Animator _animator;
     private NavMeshAgent _navMeshAgent;
@@ -65,12 +66,14 @@ public class Health : MonoBehaviour
         //_currentHealth -= healthPoints;
         if (gameObject.CompareTag("Player") && canTakeDamage == true)
         {
-            playerAudio = gameObject.transform.parent.GetComponent<PlayerAudio>();
-            //playerAudio.PlayPlayerAudio("hurt");
+            playerAudio = GetComponent<PlayerAudio>();
+            playerAudio.PlayPlayerAudio("hurt");
         }
 
         if (gameObject.CompareTag("Enemy"))
         {
+            enemyAudio = GetComponent<EnemyAudio>();
+            enemyAudio.PlayEnemyAudio("hurt");
             if (_animator != null)
             {
                 //_animator.SetTrigger("Hit");
