@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+
 
 public class sheild : MonoBehaviour
 {
@@ -9,9 +11,10 @@ public class sheild : MonoBehaviour
     //public GameObject gunHolder;
     //public GameObject playerCamera;
     public GameObject cube;
-   // MeleeController meleeControl;
-   // GunController gunControl;
+    // MeleeController meleeControl;
+    // GunController gunControl;
     //SwitchWeapon switchWeapon;
+    [SerializeField] private Image _clockFill;
 
 
     Health playerControl;
@@ -29,6 +32,9 @@ public class sheild : MonoBehaviour
     float originalMeleeDamage;
     float originalGunDamage;
 
+   
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -39,8 +45,11 @@ public class sheild : MonoBehaviour
         playerControl = player.GetComponent<Health>();
         playerBodyControl = playerbody.GetComponent<Health>();
 
+        _clockFill.color = new Color32(1, 1, 1, 0);
 
-       // originalMeleeDamage = meleeControl.damage;
+
+
+        // originalMeleeDamage = meleeControl.damage;
         //originalGunDamage = gunControl.damage;
 
         //empty
@@ -52,6 +61,9 @@ public class sheild : MonoBehaviour
         if (shieldIsActive)
         {
             timeWithShield -= Time.deltaTime;
+
+            _clockFill.color = new Color32(136, 209, 255, 255);
+            _clockFill.fillAmount = timeWithShield / 30;
             if (timeWithShield <= 0)
             {
                 //meleeControl.damage = originalMeleeDamage;

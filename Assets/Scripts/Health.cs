@@ -13,7 +13,7 @@ public class Health : MonoBehaviour
     [SerializeField] private Image _HealthBarFIll;
     [SerializeField] private Image _HealthBarBack;
 
-    [SerializeField] public bool canTakeDamage;
+    [SerializeField] public bool canTakeDamage = true;
 
     public string sceneToReload;
     public float MaximumHealth { get { return _maximumHealth; } }
@@ -28,7 +28,7 @@ public class Health : MonoBehaviour
     {
         _currentHealth = _maximumHealth;
 
-        if(gameObject.name == "boss1")
+        if(gameObject.name == "boss1" || gameObject.name == "Cronarch")
         {
             _HealthBarFIll.color = new Color32(1, 1, 1, 0);
             _HealthBarBack.color = new Color32(1, 1, 1, 0);
@@ -80,17 +80,17 @@ public class Health : MonoBehaviour
                 StartCoroutine(HitEnemy());
             }
 
-            _currentHealth -= healthPoints;
+            //_currentHealth -= healthPoints;
             //playerAudio.PlayPlayerAudio("hurt");
 
         }
 
-        if (canTakeDamage == true)
+        if (canTakeDamage == true && healthPoints >=0)
         {
             _currentHealth -= healthPoints;
         }
 
-        if (gameObject.name == "boss1")
+        if(gameObject.name == "boss1" || gameObject.name == "Cronarch")
         {
             float fillAmount = _currentHealth / _maximumHealth;
             //_HealthBarFIll.color = new Color32(254,0,0,255);
@@ -115,7 +115,7 @@ public class Health : MonoBehaviour
             float fillAmount = _currentHealth / _maximumHealth;
             _HealthBarFIll.fillAmount = fillAmount;
         }
-        if (gameObject.name == "boss1")
+        if(gameObject.name == "boss1" || gameObject.name == "Cronarch")
         {
             float fillAmount = _currentHealth / _maximumHealth;
             _HealthBarFIll.fillAmount = fillAmount;
@@ -134,7 +134,7 @@ public class Health : MonoBehaviour
 
     void KillPlayer()
     {
-        if (gameObject.CompareTag("Player") || gameObject.name == "boss1" || gameObject.name == "Exit")
+        if (gameObject.CompareTag("Player") || gameObject.name == "boss1" || gameObject.name == "Exit" || gameObject.name == "Cronarch")
         {
             SceneManager.LoadScene(sceneToReload);
             Cursor.visible = true;

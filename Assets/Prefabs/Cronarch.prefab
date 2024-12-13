@@ -162,7 +162,7 @@ MonoBehaviour:
   _currentHealth: 0
   _HealthBarFIll: {fileID: 0}
   _HealthBarBack: {fileID: 0}
-  canTakeDamage: 0
+  canTakeDamage: 1
   sceneToReload: 
 --- !u!114 &-6546579628996448529
 MonoBehaviour:
