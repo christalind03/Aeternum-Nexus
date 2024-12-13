@@ -24,11 +24,9 @@ public class TitleScreen : MonoBehaviour
         _uiDocument = GetComponent<UIDocument>();
 
         _playButton = _uiDocument.rootVisualElement.Q("PlayButton") as Button;
-        _settingsButton = _uiDocument.rootVisualElement.Q("SettingsButton") as Button;
         _exitButton = _uiDocument.rootVisualElement.Q("ExitButton") as Button;
 
         _playButton.RegisterCallback<ClickEvent>(OnPlay);
-        _settingsButton.RegisterCallback<ClickEvent>(OnSettings);
         _exitButton.RegisterCallback<ClickEvent>(OnExit);
 
         var audioManager = FindObjectOfType<AudioManager>();
@@ -43,12 +41,6 @@ public class TitleScreen : MonoBehaviour
         Debug.Log("This should switch to the level select scene...");
         PlayButtonSound();
         SceneManager.LoadScene(LevelSelect);
-    }
-
-    private void OnSettings(ClickEvent clickEvent)
-    {
-        Debug.Log("This should switch to the settings scene...");
-        PlayButtonSound();
     }
 
     private void OnExit(ClickEvent clickEvent)

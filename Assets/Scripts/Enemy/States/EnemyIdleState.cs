@@ -9,6 +9,7 @@ public class EnemyIdleState<EState> : EnemyState<EState> where EState : Enum
 
     private Quaternion _targetRotation;
     private bool _hasTargetRotation; 
+    private bool _isAnimated;
     private bool _isReset;
 
     public override void Set(EnemyState<EState> otherInstance)
@@ -25,6 +26,7 @@ public class EnemyIdleState<EState> : EnemyState<EState> where EState : Enum
         base.Initialize(context, estate);
 
         _hasTargetRotation = false;
+        _isAnimated = true;
         _isReset = true;
     }
 
@@ -33,12 +35,21 @@ public class EnemyIdleState<EState> : EnemyState<EState> where EState : Enum
         bool hasInitialPosition = Context.InitialPosition == Context.Transform.position;
         bool hasInitialRotation = Context.InitialRotation == Context.Transform.rotation;
 
+        _isAnimated = hasInitialPosition;
         _isReset = hasInitialPosition && hasInitialRotation;
 
         Context.NavMeshAgent.SetDestination(Context.InitialPosition);
+
+        if (_isAnimated && Context.Animator != null)
+        {
+            Context.Animator.SetTrigger("Idle");
+        }
     }
 
-    public override void ExitState() { }
+    public override void ExitState()
+    {
+        _isAnimated = false;
+    }
 
     public override void OnTriggerEnter(Collider otherCollider) { }
     public override void OnTriggerExit(Collider otherCollider) { }
@@ -53,6 +64,15 @@ public class EnemyIdleState<EState> : EnemyState<EState> where EState : Enum
             {
                 // Rotate the enemy back to its original rotation
                 Context.Transform.rotation = Quaternion.Slerp(Context.Transform.rotation, Context.InitialRotation, RotationSpeed * Time.deltaTime);
+                
+                if (!_isAnimated)
+                {
+                    if (Context.Animator != null)
+                    {
+                        Context.Animator.SetTrigger("Idle");
+                        _isAnimated = true;
+                    }
+                }
             }
 
             // We would set this to be Context.InitialRotation == Context.CurrentTransform.rotation, but due to floating point values we have to calculate its distance instead.

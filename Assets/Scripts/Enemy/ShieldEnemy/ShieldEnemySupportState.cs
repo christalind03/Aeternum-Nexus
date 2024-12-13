@@ -1,21 +1,23 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
+//using UnityEditor.SceneManagement;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "Support State", menuName = "BaseState/ShieldEnemy/SupportState")]
 public class ShieldEnemySupportState : EnemyState<ShieldEnemy.EEnemyState>
 {
     public LayerMask AllyMask;
-    public float SupportRadius;
+    //public float SupportRadius;
 
-    private Collider[] _detectedAllies = new Collider[25];
+    //private Collider[] _detectedAllies = new Collider[25];
 
     public override void Set(EnemyState<ShieldEnemy.EEnemyState> otherInstance)
     {
         if (otherInstance is ShieldEnemySupportState otherState)
         {
             AllyMask = otherState.AllyMask;
-            SupportRadius = otherState.SupportRadius;
+            //SupportRadius = otherState.SupportRadius;
         }
     }
 
@@ -27,17 +29,24 @@ public class ShieldEnemySupportState : EnemyState<ShieldEnemy.EEnemyState>
 
     public override void EnterState()
     {
-        int totalColliders = Physics.OverlapSphereNonAlloc(Context.Transform.position, SupportRadius, _detectedAllies, AllyMask, QueryTriggerInteraction.Collide);
-
-        for (int i = 0; i < totalColliders; i++)
+        if (Context.Animator != null)
         {
-            GameObject allyObject = _detectedAllies[i].gameObject;
-
-            if (!allyObject.TryGetComponent(out EnemyShield enemyShield))
-            {
-                _detectedAllies[i].gameObject.AddComponent<EnemyShield>();
-            }
+            Context.Animator.SetTrigger("Support");
         }
+
+        Context.Transform.gameObject.AddComponent<EnemyShield>();
+
+        //int totalColliders = Physics.OverlapSphereNonAlloc(Context.Transform.position, SupportRadius, _detectedAllies, AllyMask, QueryTriggerInteraction.Collide);
+
+        //for (int i = 0; i < totalColliders; i++)
+        //{
+        //    GameObject allyObject = _detectedAllies[i].gameObject;
+
+        //    if (!allyObject.TryGetComponent(out EnemyShield enemyShield))
+        //    {
+        //        _detectedAllies[i].gameObject.AddComponent<EnemyShield>();
+        //    }
+        //}
     }
 
     public override void ExitState() { }

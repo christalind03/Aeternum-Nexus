@@ -20,6 +20,7 @@ public class Enemy<EState> : StateManager<EState> where EState : Enum
 
     protected FieldOfView _fieldOfView;
     protected NavMeshAgent _navMeshAgent;
+    protected Animator _animator;
 
     protected EnemyContext _context;
     protected bool _canAttack;
@@ -33,8 +34,9 @@ public class Enemy<EState> : StateManager<EState> where EState : Enum
 
         _fieldOfView = GetComponent<FieldOfView>();
         _navMeshAgent = GetComponent<NavMeshAgent>();
+        _animator = GetComponentInChildren<Animator>();
 
-        _context = new EnemyContext(_attackCooldown, _attackDamage, _initialPosition, _initialRotation, transform, _fieldOfView, _navMeshAgent);
+        _context = new EnemyContext(_attackCooldown, _attackDamage, _initialPosition, _initialRotation, transform, _fieldOfView, _navMeshAgent, _animator);
         _canAttack = true;
 
         InitializeStates();

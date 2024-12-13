@@ -185,7 +185,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Level1: Level1
-  Level1Boss: Boss1
+  Level1Boss: Level1boss
+  Level2: Level2
+  Level2Boss: Level2boss
   buttonClickSound: {fileID: 8300000, guid: df421c036bc3a9f4390c3089d691a3d4, type: 3}
 --- !u!1 &1552693928
 GameObject:

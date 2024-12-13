@@ -30,6 +30,11 @@ public class EnemyFleeState<EState> : EnemyState<EState> where EState : Enum
     {
         _initialSpeed = Context.NavMeshAgent.acceleration;
         Context.NavMeshAgent.acceleration = FleeSpeed;
+
+        if (Context.Animator != null)
+        {
+            Context.Animator.SetTrigger("Flee");
+        }
     }
 
     public override void ExitState()
@@ -43,12 +48,15 @@ public class EnemyFleeState<EState> : EnemyState<EState> where EState : Enum
 
     public override void UpdateState()
     {
-        // Calculate the direction opposite of the player
-        Transform playerTransform = Context.FieldOfView.DetectedObjects[0].transform;
+        if (Context.FieldOfView.DetectedObjects.Count > 0)
+        {
+            // Calculate the direction opposite of the player
+            Transform playerTransform = Context.FieldOfView.DetectedObjects[0].transform;
 
-        Vector3 targetDirection = (Context.Transform.position - playerTransform.position).normalized;
-        Vector3 targetPosition = Context.Transform.position + targetDirection * FleeDistance;
+            Vector3 targetDirection = (Context.Transform.position - playerTransform.position).normalized;
+            Vector3 targetPosition = Context.Transform.position + targetDirection * FleeDistance;
 
-        Context.NavMeshAgent.SetDestination(targetPosition);
+            Context.NavMeshAgent.SetDestination(targetPosition);
+        }
     }
 }

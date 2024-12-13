@@ -27,6 +27,11 @@ public class HealerSupportState : EnemyState<HealerEnemy.EEnemyState>
 
     public override void EnterState()
     {
+        if (Context.Animator != null)
+        {
+            Context.Animator.SetTrigger("Support");
+        }
+
         int _colliderCount = Physics.OverlapSphereNonAlloc(Context.Transform.position, SupportRadius, _detectedColliders, SupportLayers, QueryTriggerInteraction.Collide);
 
         for (int i = 0; i < _colliderCount; ++i)
