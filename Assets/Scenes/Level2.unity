@@ -2909,6 +2909,12 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
+--- !u!1 &558889982 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4375518340792023250, guid: ccaf0ddf330a2b243a58955fd13dbc21,
+    type: 3}
+  m_PrefabInstance: {fileID: 2103163080}
+  m_PrefabAsset: {fileID: 0}
 --- !u!65 &559480605
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -18089,6 +18095,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1327852552132088667, guid: ccaf0ddf330a2b243a58955fd13dbc21,
+        type: 3}
+      propertyPath: cube
+      value: 
+      objectReference: {fileID: 558889982}
     - target: {fileID: 1327852552132088667, guid: ccaf0ddf330a2b243a58955fd13dbc21,
         type: 3}
       propertyPath: player
