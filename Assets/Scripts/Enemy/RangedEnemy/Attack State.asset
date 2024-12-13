@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ProjectilePrefab: {fileID: 665870439883776629, guid: 697224b2175d9264ab7cfcc30cabe1bf,
     type: 3}
-  ProjectileSpeed: 3
-  MaxDistance: 10
+  ProjectileSpeed: 7.5
+  MaxDistance: 15

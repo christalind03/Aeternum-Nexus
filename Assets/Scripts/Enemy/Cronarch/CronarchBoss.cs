@@ -51,8 +51,10 @@ public class CronarchBoss : Enemy<CronarchBoss.EEnemyState>
         {
             if (_currentClones.All(thisClone => thisClone == null))
             {
+                // Activate the object used to render the enemy
+                transform.GetChild(0).gameObject.SetActive(true);
+
                 _collider.enabled = true;
-                _meshRenderer.enabled = true;
                 _navMeshAgent.enabled = true;
                 _fieldOfView.enabled = true;
 
@@ -67,7 +69,6 @@ public class CronarchBoss : Enemy<CronarchBoss.EEnemyState>
             {
                 if (!_clonesEnabled && _clonesTimer == 0)
                 {
-                    Debug.Log("Enabling clones...");
                     EnableClones();
                 }
 
@@ -106,21 +107,18 @@ public class CronarchBoss : Enemy<CronarchBoss.EEnemyState>
 
     private void EnableClones()
     {
-        //if (_clonesEnabled == false)
-        //{
-            _collider.enabled = false;
-            _meshRenderer.enabled = false;
-            _navMeshAgent.enabled = false;
-            _fieldOfView.enabled = false;
+        // Disable the object used to render the enemy
+        transform.GetChild(0).gameObject.SetActive(false);
+
+        _collider.enabled = false;
+        _navMeshAgent.enabled = false;
+        _fieldOfView.enabled = false;
         
-            _clonesEnabled = true;
+        _clonesEnabled = true;
 
-            for (int i = 0; i < _currentClones.Length; i++)
-            {
-                _currentClones[i] = Instantiate(_clonePrefab, _cloneTransforms[i].position, _cloneTransforms[i].rotation);
-            }
-
-            //yield return new WaitForSeconds(_clonesCooldown);
-        //}
+        for (int i = 0; i < _currentClones.Length; i++)
+        {
+            _currentClones[i] = Instantiate(_clonePrefab, _cloneTransforms[i].position, _cloneTransforms[i].rotation);
+        }
     }
 }

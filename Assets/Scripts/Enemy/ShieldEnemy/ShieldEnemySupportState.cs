@@ -1,21 +1,22 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.SceneManagement;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "Support State", menuName = "BaseState/ShieldEnemy/SupportState")]
 public class ShieldEnemySupportState : EnemyState<ShieldEnemy.EEnemyState>
 {
     public LayerMask AllyMask;
-    public float SupportRadius;
+    //public float SupportRadius;
 
-    private Collider[] _detectedAllies = new Collider[25];
+    //private Collider[] _detectedAllies = new Collider[25];
 
     public override void Set(EnemyState<ShieldEnemy.EEnemyState> otherInstance)
     {
         if (otherInstance is ShieldEnemySupportState otherState)
         {
             AllyMask = otherState.AllyMask;
-            SupportRadius = otherState.SupportRadius;
+            //SupportRadius = otherState.SupportRadius;
         }
     }
 
@@ -32,17 +33,19 @@ public class ShieldEnemySupportState : EnemyState<ShieldEnemy.EEnemyState>
             Context.Animator.SetTrigger("Support");
         }
 
-        int totalColliders = Physics.OverlapSphereNonAlloc(Context.Transform.position, SupportRadius, _detectedAllies, AllyMask, QueryTriggerInteraction.Collide);
+        Context.Transform.gameObject.AddComponent<EnemyShield>();
 
-        for (int i = 0; i < totalColliders; i++)
-        {
-            GameObject allyObject = _detectedAllies[i].gameObject;
+        //int totalColliders = Physics.OverlapSphereNonAlloc(Context.Transform.position, SupportRadius, _detectedAllies, AllyMask, QueryTriggerInteraction.Collide);
 
-            if (!allyObject.TryGetComponent(out EnemyShield enemyShield))
-            {
-                _detectedAllies[i].gameObject.AddComponent<EnemyShield>();
-            }
-        }
+        //for (int i = 0; i < totalColliders; i++)
+        //{
+        //    GameObject allyObject = _detectedAllies[i].gameObject;
+
+        //    if (!allyObject.TryGetComponent(out EnemyShield enemyShield))
+        //    {
+        //        _detectedAllies[i].gameObject.AddComponent<EnemyShield>();
+        //    }
+        //}
     }
 
     public override void ExitState() { }

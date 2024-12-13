@@ -15,4 +15,4 @@ MonoBehaviour:
   AllyMask:
     serializedVersion: 2
     m_Bits: 128
-  SupportRadius: 3
+  SupportRadius: 5
