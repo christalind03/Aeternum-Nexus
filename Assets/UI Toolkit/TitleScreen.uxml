@@ -4,7 +4,6 @@
         <ui:Label tabindex="-1" text="Aeternum&#10;nexus" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Title" style="-unity-font: url(&quot;project://database/Assets/Fonts/sdglitchdemo.regular.ttf?fileID=12800000&amp;guid=cf91e8dcc03ceb142a98d0f2853fe6cc&amp;type=3#sdglitchdemo.regular&quot;); -unity-font-definition: initial; font-size: 250px; color: rgb(255, 255, 255);" />
         <ui:VisualElement style="flex-grow: 1; justify-content: flex-end;">
             <ui:Button text="Play" parse-escape-sequences="true" display-tooltip-when-elided="true" name="PlayButton" class="button" style="transition-duration: 0.15s; width: 288px;" />
-            <ui:Button text="Settings" parse-escape-sequences="true" display-tooltip-when-elided="true" name="SettingsButton" class="button" style="transition-duration: 0.15s; width: 484px;" />
             <ui:Button text="Exit" parse-escape-sequences="true" display-tooltip-when-elided="true" name="ExitButton" class="button" style="transition-duration: 0.15s; width: 240px;" />
         </ui:VisualElement>
     </ui:VisualElement>
