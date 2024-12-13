@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c225818783c711441b85869187106cda, type: 3}
   m_Name: Attack State
   m_EditorClassIdentifier: 
-  ProjectilePrefab: {fileID: 5670454988155367846, guid: 3ed943f3f65c1824487bd76ace436551,
+  ProjectilePrefab: {fileID: 665870439883776629, guid: 697224b2175d9264ab7cfcc30cabe1bf,
     type: 3}
   ProjectileSpeed: 10
   MaxDistance: 10

@@ -56,7 +56,8 @@ public class sheild : MonoBehaviour
             {
                 //meleeControl.damage = originalMeleeDamage;
                 //gunControl.damage = originalGunDamage;
-
+                playerControl.canTakeDamage = true;
+                playerBodyControl.canTakeDamage = true;
                 shieldIsActive = false;
                 Destroy(transform.parent.gameObject);
 
@@ -64,6 +65,13 @@ public class sheild : MonoBehaviour
 
 
             }
+            Debug.Log("sheild is active == true");
+        }
+        else
+        {
+            
+            Debug.Log("sheild is active == false");
+
         }
     }
 

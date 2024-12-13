@@ -291,8 +291,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   titleScreenMusic: {fileID: 8300000, guid: f69b180ea32048e44ba91975836973b2, type: 3}
-  level1Music: {fileID: 8300000, guid: af38d3fd747507e4c9259fd42a2c37ee, type: 3}
-  level2Music: {fileID: 8300000, guid: 218e44b7191a28344881893ac3d23431, type: 3}
+  level1Music: {fileID: 8300000, guid: 218e44b7191a28344881893ac3d23431, type: 3}
+  level2Music: {fileID: 8300000, guid: af38d3fd747507e4c9259fd42a2c37ee, type: 3}
   buttonPressSound: {fileID: 8300000, guid: df421c036bc3a9f4390c3089d691a3d4, type: 3}
 --- !u!4 &1345130726
 Transform:
@@ -681,7 +681,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27554074b7e3dc14fa7af0c17a92a298, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  audioHolder: {fileID: 1345130724}
   buttonClickSound: {fileID: 8300000, guid: df421c036bc3a9f4390c3089d691a3d4, type: 3}
   LevelSelect: Level-Select
 --- !u!1001 &6706956359967651443

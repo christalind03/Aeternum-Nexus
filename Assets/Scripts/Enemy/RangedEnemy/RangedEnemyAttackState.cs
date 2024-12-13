@@ -31,7 +31,12 @@ public class RangedEnemyAttackState : EnemyAttackState<RangedEnemy.EEnemyState>
 
         if (Context.AttackCooldown <= _attackTimer)
         {
-            Projectile.CreateProjectile(ProjectilePrefab, Context.Transform.position, Context.Transform.rotation, Context.AttackDamage, ProjectileSpeed, MaxDistance);
+            if (Context.Animator != null)
+            {
+                Context.Animator.SetTrigger("Attack");
+            }
+
+            Projectile.CreateProjectile(ProjectilePrefab, Context.Transform.position + new Vector3(-0.35f, 0.35f, 0f), Context.Transform.rotation, Context.AttackDamage, ProjectileSpeed, MaxDistance);
             _attackTimer = 0f;
         }
     }
