@@ -111,7 +111,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _attackDamage: 0
-  _projectileSpeed: 3
+  _projectileSpeed: 6
   _maxDistance: 0
 --- !u!1001 &3449962675058282680
 PrefabInstance:
