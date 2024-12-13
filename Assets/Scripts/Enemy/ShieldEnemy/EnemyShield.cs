@@ -6,11 +6,11 @@ public class EnemyShield : MonoBehaviour
 {
     private void OnEnable()
     {
-        Debug.Log("Shield applied!");
+        gameObject.GetComponent<MeshRenderer>().enabled = true;
     }
 
     private void OnDisable()
     {
-        Debug.Log("Shield removed!");
+        gameObject.GetComponent<MeshRenderer>().enabled = false;
     }
 }

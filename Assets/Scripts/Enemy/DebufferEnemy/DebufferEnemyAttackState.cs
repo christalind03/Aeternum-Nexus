@@ -35,7 +35,12 @@ public class DebufferEnemyAttackState : EnemyAttackState<DebufferEnemy.EEnemySta
 
         if (Context.AttackCooldown <= _attackTimer)
         {
-            DebuffProjectile.CreateProjectile(ProjectilePrefab, Context.Transform.position, Context.Transform.rotation, Context.AttackDamage, ProjectileSpeed, MaxDistance, DebuffDuration, DebuffPercentage);
+            if (Context.Animator != null)
+            {
+                Context.Animator.SetTrigger("Attack");
+            }
+
+            DebuffProjectile.CreateProjectile(ProjectilePrefab, Context.Transform.position + new Vector3(-0.35f, 0.35f, 0f), Context.Transform.rotation, Context.AttackDamage, ProjectileSpeed, MaxDistance, DebuffDuration, DebuffPercentage);
             _attackTimer = 0f;
         }
     }

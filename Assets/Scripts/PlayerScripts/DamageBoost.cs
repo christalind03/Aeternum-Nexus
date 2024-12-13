@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class DamageBoost : MonoBehaviour
 {
@@ -13,6 +14,7 @@ public class DamageBoost : MonoBehaviour
     MeleeController meleeControl;
     GunController gunControl;
     SwitchWeapon switchWeapon;
+    [SerializeField] private Image _clockFill;
 
     [Header("Modifiers")]
     public float damageModifier;
@@ -31,6 +33,8 @@ public class DamageBoost : MonoBehaviour
 
         originalMeleeDamage = meleeControl.damage;
         originalGunDamage = gunControl.damage;
+
+        _clockFill.color = new Color32(1, 1, 1, 0);
     }
 
     // Update is called once per frame
@@ -39,6 +43,10 @@ public class DamageBoost : MonoBehaviour
         if (boostIsActive)
         {
             timeWithBoost -= Time.deltaTime;
+
+            _clockFill.color = new Color32(136, 209, 255, 255);
+            _clockFill.fillAmount = timeWithBoost/30;
+
             if (timeWithBoost <= 0)
             {
                 meleeControl.damage = originalMeleeDamage;

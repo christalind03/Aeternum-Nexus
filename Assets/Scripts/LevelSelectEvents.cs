@@ -9,7 +9,9 @@ public class LevelSelectEvents : MonoBehaviour
     private UIDocument main;
 
     public string Level1 = "Level1";
-    public string Level1Boss = "Boss1";
+    public string Level1Boss = "Level1boss";
+    public string Level2 = "Level2";
+    public string Level2Boss = "Level2boss";
 
     public AudioClip buttonClickSound;
     AudioSource _audioSource;
@@ -53,6 +55,8 @@ public class LevelSelectEvents : MonoBehaviour
         {
             Debug.Log("Currently locked(level2)");
             PlayButtonSound();
+            SceneManager.LoadScene(Level2);
+
         }
     }
     private void OnBottomRight(ClickEvent click)
@@ -60,6 +64,8 @@ public class LevelSelectEvents : MonoBehaviour
         {
             Debug.Log("Enter scene:LOCKEDLevel1-Boss");
             PlayButtonSound();
+            SceneManager.LoadScene(Level1Boss);
+
         }
     }
     private void OnBottomLeft(ClickEvent click)
@@ -67,6 +73,8 @@ public class LevelSelectEvents : MonoBehaviour
         {
             Debug.Log("Currently locked(level2)");
             PlayButtonSound();
+            SceneManager.LoadScene(Level2Boss);
+
         }
     }
 

@@ -12,8 +12,9 @@ public class EnemyContext
 
     public readonly FieldOfView FieldOfView;
     public readonly NavMeshAgent NavMeshAgent;
+    public readonly Animator Animator;
 
-    public EnemyContext(float attackCooldown, float attackDamage, Vector3 initialPosition, Quaternion initialRotation, Transform transform, FieldOfView fieldOfView, NavMeshAgent navMeshAgent)
+    public EnemyContext(float attackCooldown, float attackDamage, Vector3 initialPosition, Quaternion initialRotation, Transform transform, FieldOfView fieldOfView, NavMeshAgent navMeshAgent, Animator animator)
     {
         AttackCooldown = attackCooldown;
         AttackDamage = attackDamage;
@@ -24,5 +25,6 @@ public class EnemyContext
 
         FieldOfView = fieldOfView;
         NavMeshAgent = navMeshAgent;
+        Animator = animator;
     }
 }
