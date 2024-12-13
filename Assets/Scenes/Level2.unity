@@ -10348,9 +10348,8 @@ MonoBehaviour:
   gunHolder: {fileID: 1863866987}
   playerCamera: {fileID: 1863866989}
   cube: {fileID: 1190820337}
-<<<<<<< HEAD
-  damageModifier: 0.25
-  timeWithBoost: 5
+  damageModifier: 1
+  timeWithBoost: 30
 --- !u!1001 &1723351768
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10448,10 +10447,7 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 1184791160}
   m_SourcePrefab: {fileID: 100100000, guid: 2cc432a19614e7e40b4858dcbaef8be6, type: 3}
-=======
-  damageModifier: 1
-  timeWithBoost: 30
->>>>>>> 1a80c49037953e26d62a3631084990065ee24a0a
+
 --- !u!1 &1761398612 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8740841237538046645, guid: e4610a48aaa3f6b43a640a61c672a39e,
