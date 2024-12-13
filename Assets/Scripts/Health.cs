@@ -64,7 +64,7 @@ public class Health : MonoBehaviour
         }
 
         //_currentHealth -= healthPoints;
-        if (gameObject.CompareTag("Player") && canTakeDamage == true)
+        if (gameObject.CompareTag("Player") && canTakeDamage == true && gameObject.name != "PlayerBody")
         {
             playerAudio = GetComponent<PlayerAudio>();
             playerAudio.PlayPlayerAudio("hurt");
